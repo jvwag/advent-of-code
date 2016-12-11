@@ -1,9 +1,14 @@
 <?php
 
-require_once("../common.php");
+use jvwag\AdventOfCode2016\AssignmentDownloader;
 
-getAssignment(__DIR__, 3);
-$data = file_get_contents("day3.txt");
+require_once(__DIR__."/../vendor/autoload.php");
+
+$config = json_decode(file_get_contents(__DIR__."/../config/config.json"), true);
+$logger = new \Monolog\Logger("day1");
+
+$dl = new AssignmentDownloader(2016, $config["session"], $logger);
+$data = $dl->getAssignmentData(3);
 
 $valid1 = 0;
 $valid2 = 0;

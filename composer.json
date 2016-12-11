@@ -1,0 +1,19 @@
+{
+  "name": "jvwag/AdventOfCode2016",
+  "description": "My personal solutions to the Advent of Code in 2016",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joffrey van Wageningen",
+      "email": "joffrey@ne2000.nl"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "6.2.2",
+    "monolog/monolog": "1.22.0"
+  },
+  "autoload": {
+    "psr-4": {"jvwag\\AdventOfCode2016\\": "src/"}
+  }
+}

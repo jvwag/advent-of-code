@@ -1,9 +1,14 @@
-s<?php
+<?php
 
-require_once("../common.php");
+use jvwag\AdventOfCode2016\AssignmentDownloader;
 
-getAssignment(__DIR__, 1);
-$data = file_get_contents("day1.txt");
+require_once(__DIR__."/../vendor/autoload.php");
+
+$config = json_decode(file_get_contents(__DIR__."/../config/config.json"), true);
+$logger = new \Monolog\Logger("day1");
+
+$dl = new AssignmentDownloader(2016, $config["session"], $logger);
+$data = $dl->getAssignmentData(1);
 
 $x = 0;
 $y = 0;
@@ -34,7 +39,7 @@ foreach ($match as list($action, $direction, $distance)) {
         $visited_blocks[$x][$y] = true;
     }
 
-     printf("action %-5s | direction: %s | distance: %-3d | x: %-3d | y: %-3d | d: %-3d".PHP_EOL, $action, $direction, $distance, $x, $y, $d);
+    $logger->debug(sprintf("action %-5s | direction: %s | distance: %-3d | x: %-3d | y: %-3d | d: %-3d".PHP_EOL, $action, $direction, $distance, $x, $y, $d));
 }
 
 echo (abs($x) + abs($y)) . PHP_EOL;
