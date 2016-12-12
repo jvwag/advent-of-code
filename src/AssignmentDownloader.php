@@ -1,6 +1,6 @@
 <?php
 
-namespace jvwag\AdventOfCode2016;
+namespace jvwag\AdventOfCode;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -196,7 +196,7 @@ class AssignmentDownloader
     }
 
     /**
-     * Get the year of the adeventofcode
+     * Get the year of the adventofcode
      *
      * @return int Year of the adventofcode
      */

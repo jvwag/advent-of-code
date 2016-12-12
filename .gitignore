@@ -1,4 +1,6 @@
 .idea/
 downloads/
 vendor/
+config/config.json
 composer.phar
+composer.lock

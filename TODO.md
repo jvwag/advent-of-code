@@ -1,0 +1,5 @@
+- Document Day 2..4
+- Document Assignment* classes
+- Review DI strategy
+- Update logging to use ConsoleOutput
+- Link Console verbosity to Monolog
