@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Joffrey
- * Date: 12-12-2016
- * Time: 22:53
- */
 
 namespace jvwag\AdventOfCode\Year2016;
-
 
 use jvwag\AdventOfCode\AssignmentController;
 use jvwag\AdventOfCode\AssignmentInterface;
