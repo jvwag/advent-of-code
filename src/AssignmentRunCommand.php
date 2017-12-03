@@ -42,10 +42,12 @@ class AssignmentRunCommand extends ContainerAwareCommand
             $answers = $assignment->run();
 
             foreach ([1, 2] as $part) {
-                $output->write(sprintf("Answer day %d of %d, part %d:\n%s\n", $day, $year, $part, $answers[$part - 1]));
+                if (isset($answers[$part - 1])) {
+                    $output->write(sprintf("Answer day %s of %d, part %d:\n%s\n", $day, $year, $part, $answers[$part - 1]));
+                }
             }
         } catch (\Exception $e) {
-            $output->write("error: ".$e->getMessage());
+            $output->write("error: " . $e->getMessage());
         }
     }
 }
