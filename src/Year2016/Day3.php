@@ -2,18 +2,26 @@
 
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day3 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day3
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day3 extends Assignment
 {
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = $this->assignment_downloader->getAssignmentData(3);
+        $data = $this->getInput();
+
         $valid1 = 0;
         $valid2 = 0;
         foreach (explode("\n", trim($data)) as $line) {
-            if (preg_match("/([0-9]+)\\s+([0-9]+)\\s+([0-9]+)/", $line, $sides)) {
+            if (preg_match("/(\d+)\\s+(\d+)\\s+(\d+)/", $line, $sides)) {
                 if ($this->validTriangle($sides[1], $sides[2], $sides[3])) {
                     $valid1++;
                 }
@@ -22,7 +30,7 @@ class Day3 extends AssignmentController implements AssignmentInterface
                 $col[1][] = $sides[2];
                 $col[2][] = $sides[3];
 
-                if (count($col[0]) == 3) {
+                if (\count($col[0]) === 3) {
                     for ($x = 0; $x < 3; $x++) {
                         if ($this->validTriangle($col[$x][0], $col[$x][1], $col[$x][2])) {
                             $valid2++;
@@ -33,11 +41,21 @@ class Day3 extends AssignmentController implements AssignmentInterface
             }
         }
 
-        echo $valid1 . PHP_EOL;
-        echo $valid2 . PHP_EOL;
+        return
+            [
+                $valid1,
+                $valid2,
+            ];
     }
 
-    function validTriangle($x, $y, $z)
+    /**
+     * @param $x
+     * @param $y
+     * @param $z
+     *
+     * @return bool
+     */
+    public function validTriangle($x, $y, $z): bool
     {
         foreach ([[$x, $y, $z], [$x, $z, $y], [$y, $z, $x]] as $combo) {
             if ($combo[0] + $combo[1] <= $combo[2]) {

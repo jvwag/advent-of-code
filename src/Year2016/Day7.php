@@ -2,14 +2,21 @@
 
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day7 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day7
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day7 extends Assignment
 {
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = $this->assignment_downloader->getAssignmentData(7);
+        $data = $this->getInput();
 
         $count1 = 0;
         $count2 = 0;
@@ -20,7 +27,7 @@ class Day7 extends AssignmentController implements AssignmentInterface
             foreach ($match[0] as $str) {
                 $outer = str_replace($str, ",", $outer);
             }
-            $inner = join(",", $match[1]);
+            $inner = implode(",", $match[1]);
 
 
             if ($this->findABBA($outer) && !$this->findABBA($inner)) {
@@ -36,15 +43,23 @@ class Day7 extends AssignmentController implements AssignmentInterface
 
         }
 
-        echo $count1 . PHP_EOL;
-        echo $count2 . PHP_EOL;
+        return
+            [
+                $count1,
+                $count2,
+            ];
     }
 
-    private function findABBA($str)
+    /**
+     * @param $str
+     *
+     * @return array
+     */
+    private function findABBA($str): array
     {
         $out = [];
-        for ($x = 0; $x < strlen($str) - 3; $x++) {
-            if ($str[$x + 0] != $str[$x + 1] && $str[$x + 0] == $str[$x + 3] && $str[$x + 1] == $str[$x + 2]) {
+        for ($x = 0; $x < \strlen($str) - 3; $x++) {
+            if ($str[$x + 0] !== $str[$x + 1] && $str[$x + 0] === $str[$x + 3] && $str[$x + 1] === $str[$x + 2]) {
                 $out[$x] = substr($str, $x, 4);
             }
         }
@@ -52,11 +67,16 @@ class Day7 extends AssignmentController implements AssignmentInterface
         return $out;
     }
 
-    private function findABA($str)
+    /**
+     * @param $str
+     *
+     * @return array
+     */
+    private function findABA($str): array
     {
         $out = [];
-        for ($x = 0; $x < strlen($str) - 2; $x++) {
-            if ($str[$x + 0] != $str[$x + 1] && $str[$x + 0] == $str[$x + 2]) {
+        for ($x = 0; $x < \strlen($str) - 2; $x++) {
+            if ($str[$x + 0] !== $str[$x + 1] && $str[$x + 0] === $str[$x + 2]) {
                 $out[$x] = substr($str, $x, 3);
             }
         }

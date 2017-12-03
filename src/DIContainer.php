@@ -6,9 +6,20 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
+/**
+ * Class DIContainer
+ *
+ * @package jvwag\AdventOfCode
+ */
 class DIContainer extends ContainerBuilder
 {
-    public static function buildContainer($root)
+    /**
+     * @param $root
+     *
+     * @return DIContainer
+     * @throws \Exception
+     */
+    public static function buildContainer($root): DIContainer
     {
         $container = new self();
         $container->setParameter("root", $root);

@@ -7,7 +7,7 @@ use jvwag\AdventOfCode\DIContainer;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Reference;
 
-$config = json_decode(file_get_contents(__DIR__."/config.json"), true);
+$config = include __DIR__."/config.php";
 
 /** @var $container DIContainer */
 $container->setParameter('year', $config["year"]);
@@ -36,7 +36,6 @@ $container
 
 $container
     ->register("assignment_downloader", AssignmentDownloader::class)
-    ->addArgument('%year%')
     ->addArgument('%session%')
     ->addArgument(new Reference('logger'))
     ->addArgument(new Reference('http_client'));

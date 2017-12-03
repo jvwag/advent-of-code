@@ -5,75 +5,74 @@ namespace jvwag\AdventOfCode;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Cookie\CookieJar;
-use GuzzleHttp\Cookie\SetCookie;
-use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
+/**
+ * Class AssignmentDownloader
+ *
+ * @package jvwag\AdventOfCode
+ */
 class AssignmentDownloader
 {
-    const BASE_URL = "http://adventofcode.com/";
+    private const DOMAIN = "adventofcode.com";
 
-    const MIN_YEAR = 2015;
-    const MAX_YEAR = 2050;
+    private const MIN_YEAR = 2015;
+    private const MAX_YEAR = 2050;
 
-    const MIN_DAY = 1;
-    const MAX_DAY = 25;
+    private const MIN_DAY = 1;
+    private const MAX_DAY = 25;
 
     /** @var string Contents of 'session' cookie on the adventofcode site */
     private $session;
 
-    /** @var int Year of the advent calendar */
-    private $year;
-
     /** @var ClientInterface HTTP Client Interface */
     private $http_client;
+
+    /** @var LoggerInterface */
+    private $logger;
 
     /**
      * Downloader constructor.
      *
      * @param string $session Contents of 'session' cookie on the adventofcode site
-     * @param int|null $year Year of the advent calendar
      * @param LoggerInterface|null $logger Logger
      * @param ClientInterface|null $http_client Guzzle HTTP Client interface
      *
-     * @throws \Exception
+     * @throws \InvalidArgumentException On missing
      */
-    public function __construct($year, $session, LoggerInterface $logger = null, ClientInterface $http_client = null)
+    public function __construct($session, LoggerInterface $logger = null, ClientInterface $http_client = null)
     {
         $this->setSession($session);
-        $this->setYear($year);
 
+        $this->logger = $logger;
         if ($logger === null) {
             $this->logger = new NullLogger();
-        } elseif ($logger instanceof LoggerInterface) {
-            $this->logger = $logger;
-        } else {
-            throw new \Exception("This download requires a valid PSR LoggerInterface");
         }
 
+        $this->http_client = $http_client;
         if ($http_client === null) {
             $this->http_client = new Client();
-        } elseif ($http_client instanceof ClientInterface) {
-            $this->http_client = $http_client;
-        } else {
-            throw new \Exception("This downloader requires a Guzzle HTTP ClientInterface");
         }
     }
 
     /**
      * Returns assignment data, if it is not cached it will be downloaded and cached.
      *
+     * @param $year integer Year of the advent calendar
      * @param $day integer Day of the advent calendar
      *
      * @return string Assignment Data
+     * @throws \DomainException
+     * @throws \InvalidArgumentException
      */
-    function getAssignmentData($day)
+    public function getAssignmentData($year, $day): string
     {
-        $file = $this->getAssignmentFile($day, $this->getYear());
+        $file = $this->getAssignmentFile($day, $year);
 
         if (!file_exists($file) || !filesize($file)) {
-            $data = $this->downloadAssignmentData($day);
+            $data = $this->downloadAssignmentData($year, $day);
             $this->writeAssignmentData($file, $data);
         } else {
             $data = $this->readAssignmentData($file);
@@ -83,32 +82,27 @@ class AssignmentDownloader
     }
 
     /**
+     * @param $year integer Year of the advent calendar
      * @param $day integer Day of the advent calendar
      *
      * @return string Contents of the assignment
-     * @throws \Exception If the file could not be downloaded
+     * @throws \InvalidArgumentException
      */
-    public function downloadAssignmentData($day)
+    public function downloadAssignmentData(int $year, int $day): string
     {
         $day = $this->validateDay($day);
-        $url = self::BASE_URL . $this->getYear() . "/day/" . $day . "/input";
+        $year = $this->validateYear($year);
+        $url = "http://" . self::DOMAIN . "/" . $year . "/day/" . $day . "/input";
 
-        $cookie = new SetCookie();
-        $cookie->setName("session");
-        $cookie->setValue($this->getSession());
-        $cookie->setDomain("adventofcode.com");
-        $cookie->setPath("/");
-
-        $jar = new CookieJar();
-        $jar->setCookie($cookie);
-
-        $request = new Request("GET", $url);
+        $jar = CookieJar::fromArray([
+            'session' => $this->getSession(),
+        ], self::DOMAIN);
 
         try {
-            $response = $this->http_client->send($request, ["cookies" => $jar]);
+            $response = $this->http_client->request("GET", $url, ["cookies" => $jar]);
             $body = $response->getBody();
-            $this->logger->info("Downloaded assignment", ["url" => $url, "status" => $response->getStatusCode(), "size" => strlen($body)]);
-        } catch (\Exception $e) {
+            $this->logger->info("Downloaded assignment", ["url" => $url, "status" => $response->getStatusCode(), "size" => \strlen($body)]);
+        } catch (GuzzleException $e) {
             $new_exception = new \Exception("Error downloading file: " . $e->getMessage(), 0, $e);
             $this->logger->error($e->getMessage(), ["exception" => $new_exception]);
             throw new $new_exception;
@@ -123,16 +117,16 @@ class AssignmentDownloader
      * @param $file string Name of the file to read from
      *
      * @return string Contents of the assignment
-     * @throws \Exception If the file could not be read
+     * @throws \DomainException If the file could not be read
      */
-    public function readAssignmentData($file)
+    public function readAssignmentData($file): string
     {
         if (!file_exists($file)) {
-            throw new \Exception("Assignment file does not exist");
+            throw new \DomainException("Assignment file does not exist");
         }
 
         $content = file_get_contents($file);
-        $this->logger->info("Read assignment", ["file" => $file, "size" => strlen($content)]);
+        $this->logger->info("Read assignment", ["file" => $file, "size" => \strlen($content)]);
 
         return $content;
     }
@@ -143,16 +137,19 @@ class AssignmentDownloader
      * @param $file string Name of the file to write to
      * @param $content string Contents of the assignment
      *
-     * @throws \Exception If the file is not written properly
+     * @return AssignmentDownloader
+     * @throws \DomainException If the file is not written properly
      */
-    private function writeAssignmentData($file, $content)
+    private function writeAssignmentData($file, $content): self
     {
         $size = file_put_contents($file, $content);
-        if ($size === false || strlen($content) !== $size) {
-            throw new \Exception("Error writing assignment data");
+        if ($size === false || \strlen($content) !== $size) {
+            throw new \DomainException("Error writing assignment data");
         }
 
-        $this->logger->info("Written assignment", ["file" => $file, "size" => strlen($content)]);
+        $this->logger->info("Written assignment", ["file" => $file, "size" => \strlen($content)]);
+
+        return $this;
     }
 
     /**
@@ -165,7 +162,7 @@ class AssignmentDownloader
      *
      * @return string Filename on local filesystem
      */
-    public function getAssignmentFile($day, $year)
+    public function getAssignmentFile($day, $year): string
     {
         $day = $this->validateDay($day);
         $year = $this->validateYear($year);
@@ -178,7 +175,7 @@ class AssignmentDownloader
      *
      * @return string Contents of 'session' cookie on the adventofcode site
      */
-    public function getSession()
+    public function getSession(): string
     {
         return $this->session;
     }
@@ -188,33 +185,14 @@ class AssignmentDownloader
      *
      * @param string $session Contents of 'session' cookie on the adventofcode site
      *
+     * @return AssignmentDownloader
      * @throws \InvalidArgumentException If the contents of the session string is not valid
      */
-    public function setSession($session)
+    public function setSession($session): self
     {
         $this->session = $this->validateSession($session);
-    }
 
-    /**
-     * Get the year of the adventofcode
-     *
-     * @return int Year of the adventofcode
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Set the year of the adventofcode
-     *
-     * @param int $year Year of the adventofcode
-     *
-     * @throws \InvalidArgumentException If the year is invalid of out of bounds
-     */
-    public function setYear($year)
-    {
-        $this->year = $this->validateYear($year);
+        return $this;
     }
 
     /**
@@ -225,7 +203,7 @@ class AssignmentDownloader
      * @throws \InvalidArgumentException If the day is invalid of out of bounds
      * @return int Validated day
      */
-    public function validateDay($day)
+    public function validateDay(int $day): int
     {
         $value = filter_var(
             $day,
@@ -250,7 +228,7 @@ class AssignmentDownloader
      * @throws \InvalidArgumentException If the year is invalid of out of bounds
      * @return int Validated year
      */
-    public function validateYear($year)
+    public function validateYear(int $year): int
     {
         $value = filter_var(
             $year,
@@ -273,8 +251,9 @@ class AssignmentDownloader
      * @param $session string Contents of a session cookie
      *
      * @return string Validated contents of a session cookie
+     * @throws \InvalidArgumentException
      */
-    public function validateSession($session)
+    public function validateSession(string $session): string
     {
         $value = filter_var(
             $session,

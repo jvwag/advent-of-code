@@ -2,31 +2,41 @@
 
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day8 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day8
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day8 extends Assignment
 {
-    const MAX_X = 50;
-    const MAX_Y = 6;
+    private const MAX_X = 50;
+    private const MAX_Y = 6;
 
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = $this->assignment_downloader->getAssignmentData(8);
+        $data = $this->getInput();
+
         $matrix = array_fill(0, self::MAX_Y, array_fill(0, self::MAX_X, 0));
 
         foreach (explode("\n", trim($data)) as $line) {
-            if (preg_match("/^rect ([0-9]+)x([0-9]+)$/", $line, $match)) {
-                list(, $width, $height) = $match;
+            if (preg_match("/^rect (\d+)x(\d+)$/", $line, $match)) {
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                [$tmp, $width, $height] = $match;
                 for ($x = 0; $x < $width; $x++) {
                     for ($y = 0; $y < $height; $y++) {
                         $matrix[$y][$x] = 1;
                     }
                 }
 
-            } elseif (preg_match("/^rotate (row y|column x)=([0-9]+) by ([0-9]+)$/", $line, $match)) {
-                list(, $direction, $index, $offset) = $match;
-                if ($direction == "row y") {
+            } elseif (preg_match("/^rotate (row y|column x)=(\d+) by (\d+)$/", $line, $match)) {
+                /** @noinspection PhpUnusedLocalVariableInspection */
+                [$tmp, $direction, $index, $offset] = $match;
+                if ($direction === "row y") {
                     for ($x = 0; $x < $offset; $x++) {
                         array_unshift($matrix[$index], array_pop($matrix[$index]));
                     }
@@ -46,13 +56,17 @@ class Day8 extends AssignmentController implements AssignmentInterface
         }
 
         $count = 0;
+        $output = "";
         foreach ($matrix as $row) {
             $count += array_sum($row);
+            $output .= str_replace("0", " ", str_replace("1", "X", implode("", $row))) . PHP_EOL;
         }
 
-        echo $count.PHP_EOL;
-        foreach ($matrix as $row) {
-            echo str_replace("0", " ", str_replace("1", "X", join("", $row))) . PHP_EOL;
-        }
+        return
+            [
+                $count,
+                $output,
+            ];
+
     }
 }

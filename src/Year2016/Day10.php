@@ -2,33 +2,40 @@
 
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day10 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day10
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day10 extends Assignment
 {
-    const REQUESTED_VALUE_1 = 61;
-    const REQUESTED_VALUE_2 = 17;
+    private const REQUESTED_VALUE_1 = 61;
+    private const REQUESTED_VALUE_2 = 17;
 
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = $this->assignment_downloader->getAssignmentData(10);
+        $data = $this->getInput();
 
-        $botmap = [];
+        $map = [];
         $output = [];
         foreach (explode("\n", trim($data)) as $line) {
-            if (preg_match("/^value ([0-9]+) goes to bot ([0-9]+)$/", $line, $match)) {
-                $botmap[$match[2]]["values"][] = $match[1];
-            } elseif (preg_match("/^bot ([0-9]+) gives low to (bot|output) ([0-9]+) and high to (bot|output) ([0-9]+)/", $line, $match)) {
-                if($match[2] == "bot") {
-                    $botmap[$match[1]]["low_bot"] = $match[3];
+            if (preg_match("/^value (\d+) goes to bot (\d+)$/", $line, $match)) {
+                $map[$match[2]]["values"][] = (int) $match[1];
+            } elseif (preg_match("/^bot (\d+) gives low to (bot|output) (\d+) and high to (bot|output) (\d+)/", $line, $match)) {
+                if ($match[2] === "bot") {
+                    $map[$match[1]]["low_bot"] = (int) $match[3];
                 } else {
-                    $botmap[$match[1]]["low_out"] = $match[3];
+                    $map[$match[1]]["low_out"] = (int) $match[3];
                 }
-                if($match[4] == "bot") {
-                    $botmap[$match[1]]["high_bot"] = $match[5];
+                if ($match[4] === "bot") {
+                    $map[$match[1]]["high_bot"] = (int) $match[5];
                 } else {
-                    $botmap[$match[1]]["high_out"] = $match[5];
+                    $map[$match[1]]["high_out"] = (int) $match[5];
                 }
             }
         }
@@ -36,34 +43,38 @@ class Day10 extends AssignmentController implements AssignmentInterface
         $cont = true;
         while ($cont) {
             $cont = false;
-            foreach ($botmap as $id => $bot) {
-                if (!isset($bot["done"]) && isset($bot["values"]) && count($bot["values"]) == 2) {
+            foreach ($map as $id => $bot) {
+                if (!isset($bot["done"]) && isset($bot["values"]) && \count($bot["values"]) === 2) {
                     //echo $id . ": " . join(", ", $bot["values"]) . PHP_EOL;
-                    if(isset($bot["low_bot"])) {
-                        $botmap[$bot["low_bot"]]["values"][] = min($bot["values"]);
+                    if (isset($bot["low_bot"])) {
+                        $map[$bot["low_bot"]]["values"][] = min($bot["values"]);
                     }
-                    if(isset($bot["high_bot"])) {
-                        $botmap[$bot["high_bot"]]["values"][] = max($bot["values"]);
+                    if (isset($bot["high_bot"])) {
+                        $map[$bot["high_bot"]]["values"][] = max($bot["values"]);
                     }
-                    if(isset($bot["low_out"])) {
+                    if (isset($bot["low_out"])) {
                         $output[$bot["low_out"]] = min($bot["values"]);
                     }
-                    if(isset($bot["high_out"])) {
+                    if (isset($bot["high_out"])) {
                         $output[$bot["high_out"]] = min($bot["values"]);
                     }
-                    $botmap[$id]["done"] = true;
+                    $map[$id]["done"] = true;
                     $cont = true;
                 }
             }
         }
 
-        foreach ($botmap as $id => $bot) {
-            if (isset($bot["values"]) && in_array(self::REQUESTED_VALUE_1, $bot["values"]) && in_array(self::REQUESTED_VALUE_2, $bot["values"])) {
-                echo $id . PHP_EOL;
+        $id = 0;
+        foreach ($map as $id => $bot) {
+            if (isset($bot["values"]) && \in_array(self::REQUESTED_VALUE_1, $bot["values"], true) && \in_array(self::REQUESTED_VALUE_2, $bot["values"], true)) {
                 break;
             }
         }
 
-        echo $output[0] * $output[1] * $output[2];
+        return
+            [
+                $id,
+                $output[0] * $output[1] * $output[2],
+            ];
     }
 }

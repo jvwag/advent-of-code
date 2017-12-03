@@ -1,14 +1,22 @@
 <?php
+
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day6 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day6
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day6 extends Assignment
 {
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = $this->assignment_downloader->getAssignmentData(6);
+        $data = $this->getInput();
 
         $lines = explode("\n", trim($data));
         $password1 = "";
@@ -17,7 +25,10 @@ class Day6 extends AssignmentController implements AssignmentInterface
 
         foreach ($lines as $line) {
             foreach (str_split($line) as $i => $c) {
-                @$bucket[$i][$c]++;
+                if(!isset($bucket[$i][$c])) {
+                    $bucket[$i][$c] = 0;
+                }
+                $bucket[$i][$c]++;
             }
         }
 
@@ -29,7 +40,10 @@ class Day6 extends AssignmentController implements AssignmentInterface
             $password1 .= key($letters);
         }
 
-        echo $password1 . PHP_EOL;
-        echo $password2 . PHP_EOL;
+        return
+            [
+                $password1,
+                $password2,
+            ];
     }
 }

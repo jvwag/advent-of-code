@@ -1,5 +1,3 @@
-- Document Day 2..4
-- Document Assignment* classes
-- Review DI strategy
-- Update logging to use ConsoleOutput
-- Link Console verbosity to Monolog
+- Finish 2016 (assignment 11 and up)
+- Add UnitTests for 2016
+- Find already written code from 2015 in personal archives and import into this repo

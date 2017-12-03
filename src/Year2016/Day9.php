@@ -2,41 +2,57 @@
 
 namespace jvwag\AdventOfCode\Year2016;
 
-use jvwag\AdventOfCode\AssignmentController;
-use jvwag\AdventOfCode\AssignmentInterface;
+use jvwag\AdventOfCode\Assignment;
 
-class Day9 extends AssignmentController implements AssignmentInterface
+/**
+ * Class Day9
+ *
+ * @package jvwag\AdventOfCode\Year2016
+ */
+class Day9 extends Assignment
 {
-    function run()
+    /**
+     * @return array
+     */
+    public function run(): array
     {
-        $data = trim($this->assignment_downloader->getAssignmentData(9));
+        $data = $this->getInput();
 
-        for ($i = 0; $i <= strlen($data);) {
-            if (preg_match("/^\\(([0-9]+)x([0-9]+)\\)/", substr($data, $i), $match)) {
-                list($cmd, $len, $mul) = $match;
-                $base = substr($data, $i + strlen($cmd), $len);
+        for ($i = 0; ($l = \strlen($data)) && $i <= $l;) {
+            if (preg_match("/^\\((\d+)x(\d+)\\)/", substr($data, $i), $match)) {
+                [$cmd, $len, $mul] = $match;
+                $base = substr($data, $i + \strlen($cmd), $len);
                 $insert = str_repeat($base, $mul);
-                $data = substr_replace($data, $insert, $i, strlen($cmd) + $len);
-                $i += strlen($insert);
+                $data = substr_replace($data, $insert, $i, \strlen($cmd) + $len);
+                $i += \strlen($insert);
             } else {
                 $i++;
             }
         }
 
-        echo strlen($data) . PHP_EOL;
-        echo $this->parsePart($data) . PHP_EOL;
+        return
+        [
+            \strlen($data),
+            $this->parsePart($data)
+        ];
     }
 
-    function parsePart($str)
+    /**
+     * @param $str
+     *
+     * @return float|int
+     */
+    public function parsePart($str)
     {
         $total = 0;
-        while (preg_match("/([A-Z]+)?\\(([0-9]+)x([0-9]+)\\)(.*)$/", $str, $match)) {
-            list(, $prepend, $len, $mul, $rest) = $match;
+        while (preg_match("/([A-Z]+)?\\((\d+)x(\d+)\\)(.*)$/", $str, $match)) {
+            /** @noinspection PhpUnusedLocalVariableInspection */
+            [$tmp, $prepend, $len, $mul, $rest] = $match;
             $res = $this->parsePart(substr($rest, 0, $len));
-            $total += strlen($prepend) + ($res * $mul);
-            $str = substr($str, strlen("(" . $len . "x" . $mul . ")") + strlen($prepend) + $len);
+            $total += \strlen($prepend) + ($res * $mul);
+            $str = substr($str, \strlen("(" . $len . "x" . $mul . ")") + \strlen($prepend) + $len);
         }
 
-        return strlen($str) + $total;
+        return \strlen($str) + $total;
     }
 }

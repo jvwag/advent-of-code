@@ -1,6 +1,6 @@
 {
-  "name": "jvwag/AdventOfCode2016",
-  "description": "My personal solutions to the Advent of Code in 2016",
+  "name": "jvwag/AdventOfCode",
+  "description": "My personal solutions to the Advent of Code",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
@@ -10,13 +10,20 @@
     }
   ],
   "require": {
-    "guzzlehttp/guzzle": "6.2.2",
-    "monolog/monolog": "1.22.0",
-    "symfony/console": "v3.2.0",
-    "symfony/dependency-injection": "v3.2.0",
-    "symfony/config": "v3.2.0"
+    "guzzlehttp/guzzle": "^6.2",
+    "monolog/monolog": "^1.22",
+    "symfony/console": "^3.2",
+    "symfony/dependency-injection": "^3.2",
+    "symfony/config": "^v3.2",
+    "roave/security-advisories": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
   },
   "autoload": {
     "psr-4": {"jvwag\\AdventOfCode\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {"jvwag\\AdventOfCode\\Tests\\": "tests/"}
   }
 }
