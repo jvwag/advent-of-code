@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DayTemplateTest extends TestCase
 {
-    public function testDayX()
+    public function testDayTemplate()
     {
         $assignment = new DayTemplate();
         $assignment->setInput("");

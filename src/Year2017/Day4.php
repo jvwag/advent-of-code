@@ -46,7 +46,7 @@ class Day4 extends Assignment
                             // if so, adjust the counter for test2
                             if ($words[$i] === \implode("", $word_arr)) {
                                 $output2--;
-                                break 3; // and stop testing this passphrase
+                                break 3; // and stop testing this pass phrase
                             }
                         }
                     }

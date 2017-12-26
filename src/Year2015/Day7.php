@@ -46,7 +46,7 @@ class Day7 extends Assignment
     }
 
     /**
-     * Traverse ruleset and return answer for given wire
+     * Traverse rule set and return answer for given wire
      *
      * @param $circuit
      * @param $wire

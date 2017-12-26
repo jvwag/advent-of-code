@@ -33,7 +33,7 @@ class Day15 extends Assignment
         // init vars
         $scores1 = $scores2 = [];
 
-        // loop over all posible combinations of ingredients to 100 teaspoons
+        // loop over all possible combinations of ingredients to 100 teaspoons
         foreach ($this->multiChoose(100, \count($data)) as $dist) {
 
             // loop over the ingredients to add all scores based on the distribution
