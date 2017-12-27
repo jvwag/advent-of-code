@@ -122,7 +122,7 @@ class Day10 extends Assignment
      * @param int[] $sparse_hash Array of 256 integers
      * @return string Hash
      */
-    private function denseHash($sparse_hash)
+    public function denseHash($sparse_hash)
     {
         // start with an array of 16 elements
         $xor = array_fill(0, 16, 0);
@@ -133,7 +133,7 @@ class Day10 extends Assignment
             $xor[(int)\floor($x / 16)] ^= $sparse_hash[$x];
         }
 
-        // join the xor arrag and format it to hex
+        // join the xor array and format it to hex
         return join("", array_map(function ($x) {
             return sprintf("%02x", $x);
         }, $xor));
