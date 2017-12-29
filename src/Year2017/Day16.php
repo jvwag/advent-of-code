@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -11,7 +12,7 @@ use jvwag\AdventOfCode\Assignment;
  */
 class Day16 extends Assignment
 {
-    const PASSES = 10000000;
+    private const PASSES = 10000000;
 
     /**
      * @return array
@@ -22,7 +23,7 @@ class Day16 extends Assignment
         $input = $this->getInput();
 
         // generate the circular buffer string from a-p
-        $buffer = join("", range("a", "p"));
+        $buffer = implode("", range("a", "p"));
 
         // return answers
         return
@@ -40,7 +41,7 @@ class Day16 extends Assignment
      * @param int $passes Number of passes
      * @return string Ordered circular buffer given the commands
      */
-    public function pass($buffer, $input, $passes = 1)
+    public function pass($buffer, $input, $passes = 1): string
     {
         // convert input
         $commands = explode(",", trim($input));
@@ -52,9 +53,9 @@ class Day16 extends Assignment
             foreach ($commands as $command) {
                 // parse command and determine type and arguments
                 if (preg_match("#^(s|x|p)([^/]+)(/(.*))?$#", $command, $match)) {
-                    $type = $match[1];
-                    $arg1 = $match[2];
-                    $arg2 = isset($match[4]) ? $match[4] : null;
+                    /** @noinspection PhpUnusedLocalVariableInspection */
+                    [$tmp, $type, $arg1] = $match;
+                    $arg2 = $match[4] ?? null;
 
                     switch ($type) {
                         // rotate all programs in circular buffer for argument number of steps

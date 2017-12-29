@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
 use jvwag\AdventOfCode\Assignment;
 
+/** @noinspection SpellCheckingInspection */
 /**
  * https://aoc.infi.nl/
  *

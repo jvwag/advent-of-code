@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -30,7 +31,7 @@ class Day13 extends Assignment
         // so we loop over all rules and see were we hit the firewall
         foreach ($firewall as $layer => $range) {
             // we hit the firewall if the modulus of two times the range minus one, is zero
-            if ($layer % ((2 * ($range - 1))) === 0) {
+            if ($layer % (2 * ($range - 1)) === 0) {
                 // the severity number is the sum of layer times the range for all hits
                 $severity += $layer * $range;
             }
@@ -43,7 +44,7 @@ class Day13 extends Assignment
             // loop over all rules
             foreach ($firewall as $layer => $range) {
                 // and see if we hit any firewall on a specific delay
-                if (($delay + $layer) % ((2 * ($range - 1))) === 0) {
+                if (($delay + $layer) % (2 * ($range - 1)) === 0) {
                     // we have hit the firewall, up the delay and start over from the top
                     $delay++;
                     continue 2;

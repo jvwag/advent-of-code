@@ -1,17 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2017;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2017\Day14;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2017
  */
-class Day14Test extends TestCase
+class Day14Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day14::class;
+
     public function testDay14()
     {
         $assignment = new Day14();
@@ -30,10 +33,13 @@ class Day14Test extends TestCase
      */
     public function testDay14FindAround($x, $size, $expected) {
         $assignment = new Day14();
-        self::assertEquals($expected, $assignment->findaround($x, $size), $x);
+        self::assertEquals($expected, $assignment->findAround($x, $size), $x);
     }
 
-    public function providerDay14FindAround()
+    /**
+     * @return array
+     */
+    public function providerDay14FindAround(): array
     {
         return
             [

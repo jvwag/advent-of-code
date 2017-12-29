@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -12,13 +13,13 @@ use jvwag\AdventOfCode\Assignment;
 class Day10 extends Assignment
 {
     // Default hash internal length
-    const DEFAULT_LENGTH = 256;
+    private const DEFAULT_LENGTH = 256;
 
     // Suffix of integers given in part 2
-    const PART2_INTEGERS = [17, 31, 73, 47, 23];
+    private const PART2_INTEGERS = [17, 31, 73, 47, 23];
 
     // Number of rounds to hash for part 2
-    const PART2_ROUNDS = 64;
+    private const PART2_ROUNDS = 64;
 
     /**
      * @return array
@@ -43,7 +44,7 @@ class Day10 extends Assignment
      * @param int $length Length of hash array
      * @return int Product of first two elements of the hash array
      */
-    public function run1($input, $length = self::DEFAULT_LENGTH)
+    public function run1($input, $length = self::DEFAULT_LENGTH): int
     {
         // convert ascii list of commas separated numbers to array of integers
         $inputs = array_map("\intval", explode(",", $input));
@@ -61,7 +62,7 @@ class Day10 extends Assignment
      * @param string $input ASCII string
      * @return string knothHash in dense format
      */
-    public function run2($input)
+    public function run2($input): string
     {
         // convert binary data to array of integers
         $inputs = array_map("\ord", str_split($input));
@@ -84,7 +85,7 @@ class Day10 extends Assignment
      * @param int $length Length of array
      * @return int[] Array of the hash
      */
-    public function knotHash($inputs, $rounds = 1, $length = self::DEFAULT_LENGTH)
+    public function knotHash($inputs, $rounds = 1, $length = self::DEFAULT_LENGTH): array
     {
         // init array integers of given size
         $arr = range(0, $length - 1);
@@ -122,7 +123,7 @@ class Day10 extends Assignment
      * @param int[] $sparse_hash Array of 256 integers
      * @return string Hash
      */
-    public function denseHash($sparse_hash)
+    public function denseHash($sparse_hash): string
     {
         // start with an array of 16 elements
         $xor = array_fill(0, 16, 0);
@@ -134,7 +135,7 @@ class Day10 extends Assignment
         }
 
         // join the xor array and format it to hex
-        return join("", array_map(function ($x) {
+        return implode("", array_map(function ($x) {
             return sprintf("%02x", $x);
         }, $xor));
     }

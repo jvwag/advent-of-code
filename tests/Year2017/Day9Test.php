@@ -1,17 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2017;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2017\Day9;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2017
  */
-class Day9Test extends TestCase
+class Day9Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day9::class;
+
     /**
      * @param string $input Input to clean
      * @param string $expected Expected output
@@ -25,7 +28,10 @@ class Day9Test extends TestCase
         self::assertSame($expected, $output);
     }
 
-    public function providerCleanCancels()
+    /**
+     * @return array
+     */
+    public function providerCleanCancels(): array
     {
         return
             [
@@ -58,7 +64,10 @@ class Day9Test extends TestCase
         self::assertSame($expected_remove_chars, $removed_chars);
     }
 
-    public function providerCleanGarbage()
+    /**
+     * @return array
+     */
+    public function providerCleanGarbage(): array
     {
         return
             [
@@ -89,7 +98,10 @@ class Day9Test extends TestCase
         self::assertSame($expected, $output);
     }
 
-    public function providerCountGroups()
+    /**
+     * @return array
+     */
+    public function providerCountGroups(): array
     {
         return
             [

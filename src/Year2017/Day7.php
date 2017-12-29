@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -95,7 +96,7 @@ class Day7 extends Assignment
      * @param array $nodes Nodes array with the node name as key and weight(int) and children(array) as elements
      * @return int Combined weight
      */
-    private function getWeight($node, $nodes)
+    private function getWeight($node, $nodes): int
     {
         $weight = $nodes[$node]["weight"];
         foreach ($nodes[$node]["children"] as $child) {

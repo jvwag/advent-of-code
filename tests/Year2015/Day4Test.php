@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2015;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2015\Day4;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2015
  */
-class Day4Test extends TestCase
+class Day4Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day4::class;
+
     public function testDay4Part1Example1()
     {
-        self::markTestSkipped("Skipping long test");
-
         $assignment = new Day4();
         $assignment->setInput("abcdef");
         $output = $assignment->run();
@@ -25,8 +26,6 @@ class Day4Test extends TestCase
 
     public function testDay4Part1Example2()
     {
-        self::markTestSkipped("Skipping long test");
-
         $assignment = new Day4();
         $assignment->setInput("pqrstuv");
         $output = $assignment->run();

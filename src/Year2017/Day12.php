@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -45,8 +46,8 @@ class Day12 extends Assignment
         // return answers
         return
             [
-                count($solutions[0]), // number of programs connected to program 0
-                count($solutions), // number of program groups
+                \count($solutions[0]), // number of programs connected to program 0
+                \count($solutions), // number of program groups
             ];
     }
 
@@ -58,7 +59,7 @@ class Day12 extends Assignment
      * @param int[] $found Internal state
      * @return int[] The connections to the given start node
      */
-    private function getConnections($node, $programs, &$found = [])
+    private function getConnections($node, $programs, array &$found = []): array
     {
         // add the node to the connected programs list
         $found[$node] = $node;

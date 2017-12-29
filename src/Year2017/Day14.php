@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -68,13 +69,13 @@ class Day14 extends Assignment
      * @param array $found Internal memory for found locations
      * @return int[] Locations in this region
      */
-    public function findRegion($x, $grid, &$found = [])
+    public function findRegion($x, $grid, array &$found = []): array
     {
         // add this location to list of found locations
         $found[$x] = $x;
 
         // get all locations around our starting point
-        foreach ($this->findaround($x) as $i) {
+        foreach ($this->findAround($x) as $i) {
             // and if its used, and not already found
             if($grid[$i] === "1" && !isset($found[$i])) {
                 // recursively find that new location
@@ -96,7 +97,7 @@ class Day14 extends Assignment
      * @param int $size Size of grid
      * @return int[] Array of valid locations around location
      */
-    public function findAround($x, $size = 128)
+    public function findAround($x, $size = 128): array
     {
         $arr = [];
         // valid location to the right?

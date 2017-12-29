@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2016;
 
@@ -19,11 +20,11 @@ class Day9 extends Assignment
         $data = $this->getInput();
 
         for ($i = 0; ($l = \strlen($data)) && $i <= $l;) {
-            if (preg_match("/^\\((\d+)x(\d+)\\)/", substr($data, $i), $match)) {
+            if (\preg_match("/^\\((\d+)x(\d+)\\)/", \substr($data, $i), $match)) {
                 [$cmd, $len, $mul] = $match;
-                $base = substr($data, $i + \strlen($cmd), $len);
-                $insert = str_repeat($base, $mul);
-                $data = substr_replace($data, $insert, $i, \strlen($cmd) + $len);
+                $base = \substr($data, $i + \strlen($cmd), (int) $len);
+                $insert = \str_repeat($base, $mul);
+                $data = \substr_replace($data, $insert, $i, \strlen($cmd) + $len);
                 $i += \strlen($insert);
             } else {
                 $i++;
@@ -31,10 +32,10 @@ class Day9 extends Assignment
         }
 
         return
-        [
-            \strlen($data),
-            $this->parsePart($data)
-        ];
+            [
+                \strlen($data),
+                $this->parsePart($data)
+            ];
     }
 
     /**
@@ -45,12 +46,12 @@ class Day9 extends Assignment
     public function parsePart($str)
     {
         $total = 0;
-        while (preg_match("/([A-Z]+)?\\((\d+)x(\d+)\\)(.*)$/", $str, $match)) {
+        while (\preg_match("/([A-Z]+)?\\((\d+)x(\d+)\\)(.*)$/", $str, $match)) {
             /** @noinspection PhpUnusedLocalVariableInspection */
             [$tmp, $prepend, $len, $mul, $rest] = $match;
-            $res = $this->parsePart(substr($rest, 0, $len));
+            $res = $this->parsePart(\substr($rest, 0, $len));
             $total += \strlen($prepend) + ($res * $mul);
-            $str = substr($str, \strlen("(" . $len . "x" . $mul . ")") + \strlen($prepend) + $len);
+            $str = \substr($str, \strlen("(" . $len . "x" . $mul . ")") + \strlen($prepend) + $len);
         }
 
         return \strlen($str) + $total;

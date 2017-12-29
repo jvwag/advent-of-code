@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2015;
 
@@ -75,14 +76,12 @@ class Day16 extends Assignment
             // if we have the same amount of matches as we had values to match for, it must be this sue!
             if ($output1 === null && $match1 === \count($values)) {
                 $output1 = $sue_id;
-            }
-
             // same goes for the second part
-            if ($output2 === null && $match2 === \count($values)) {
+            } elseif ($output2 === null && $match2 === \count($values)) {
                 $output2 = $sue_id;
             }
-
         }
+
 
         // return answers
         return

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -56,10 +57,10 @@ class Day8 extends Assignment
                         $comp_state = $regs[$comp_reg] <= $comp_val;
                         break;
                     case "==":
-                        $comp_state = $regs[$comp_reg] == $comp_val;
+                        $comp_state = $regs[$comp_reg] === $comp_val;
                         break;
                     case "!=":
-                        $comp_state = $regs[$comp_reg] != $comp_val;
+                        $comp_state = $regs[$comp_reg] !== $comp_val;
                         break;
                     default:
                         die("invalid input");

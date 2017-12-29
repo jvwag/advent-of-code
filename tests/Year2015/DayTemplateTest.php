@@ -1,18 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2015;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2015\DayTemplate;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2015
  */
-class DayTemplateTest extends TestCase
+class DayTemplateTest extends AssignmentTestCase
 {
-    public function testDayX()
+    protected const TEST_CLASS = DayTemplate::class;
+
+    public function testDayTemplate()
     {
         $assignment = new DayTemplate();
         $assignment->setInput("");

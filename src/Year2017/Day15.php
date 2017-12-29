@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -11,13 +12,13 @@ use jvwag\AdventOfCode\Assignment;
  */
 class Day15 extends Assignment
 {
-    const GEN1_MUL = 16807;
-    const GEN2_MUL = 48271;
-    const DIVISOR = 2147483647;
-    const PASSES_PART1 = 40000000;
-    const PASSES_PART2 = 5000000;
-    const GEN1_MOD = 4;
-    const GEN2_MOD = 8;
+    private const GEN1_MUL = 16807;
+    private const GEN2_MUL = 48271;
+    private const DIVISOR = 2147483647;
+    private const PASSES_PART1 = 40000000;
+    private const PASSES_PART2 = 5000000;
+    private const GEN1_MOD = 4;
+    private const GEN2_MOD = 8;
 
     /**
      * @return array
@@ -25,7 +26,7 @@ class Day15 extends Assignment
     public function run(): array
     {
         // get the input values
-        preg_match("/(\d+)[^\d]*(\d+)/m", trim($this->getInput()), $match);
+        preg_match("/(\d+)\D*(\d+)/m", trim($this->getInput()), $match);
         /** @noinspection PhpUnusedLocalVariableInspection */
         [$tmp, $start1, $start2] = $match;
 

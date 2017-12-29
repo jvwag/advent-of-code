@@ -1,17 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2017;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2017\Day11;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2017
  */
-class Day11Test extends TestCase
+class Day11Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day11::class;
+
     /**
      * @param string $input Input
      * @param int $expected1 Expected distance
@@ -28,7 +31,10 @@ class Day11Test extends TestCase
         self::assertEquals($expected2, $output[1]);
     }
 
-    public function providerDay11()
+    /**
+     * @return array
+     */
+    public function providerDay11(): array
     {
         return
             [

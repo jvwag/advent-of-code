@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -26,12 +27,12 @@ class Day11 extends Assignment
         foreach ($input as $dir) {
             switch ($dir) {
                 // @formatter:off
-                case "se": $x++; $y--;     ; break;
-                case "nw": $x--; $y++;     ; break;
-                case "n":      ; $y++; $z--; break;
-                case "s":      ; $y--; $z++; break;
-                case "ne": $x++;     ; $z--; break;
-                case "sw": $x--;     ; $z++; break;
+                case "se": $x++; $y--;       break;
+                case "nw": $x--; $y++;       break;
+                case "n":        $y++; $z--; break;
+                case "s":        $y--; $z++; break;
+                case "ne": $x++;       $z--; break;
+                case "sw": $x--;       $z++; break;
                 // @formatter:on
             }
 

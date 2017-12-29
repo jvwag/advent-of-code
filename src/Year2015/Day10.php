@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2015;
 
@@ -29,7 +30,7 @@ class Day10 extends Assignment
 
             // The second solution requests the 40th pass
             if ($x === 40) {
-                $output1 = \strlen($number) . PHP_EOL;
+                $output1 = \strlen($number);
             }
         }
 

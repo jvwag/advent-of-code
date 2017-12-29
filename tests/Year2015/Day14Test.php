@@ -1,17 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2015;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2015\Day14;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2015
  */
-class Day14Test extends TestCase
+class Day14Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day14::class;
+
     public function testDay14()
     {
         $assignment = new Day14();

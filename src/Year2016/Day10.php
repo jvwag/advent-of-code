@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2016;
 
@@ -45,7 +46,6 @@ class Day10 extends Assignment
             $cont = false;
             foreach ($map as $id => $bot) {
                 if (!isset($bot["done"]) && isset($bot["values"]) && \count($bot["values"]) === 2) {
-                    //echo $id . ": " . join(", ", $bot["values"]) . PHP_EOL;
                     if (isset($bot["low_bot"])) {
                         $map[$bot["low_bot"]]["values"][] = min($bot["values"]);
                     }

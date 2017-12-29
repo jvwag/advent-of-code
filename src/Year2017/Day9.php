@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -39,9 +40,9 @@ class Day9 extends Assignment
      * @param string $string string to clean
      * @return string cleaned string
      */
-    public function cleanCancels($string)
+    public function cleanCancels($string): string
     {
-        return (string)preg_replace("/!./", "", $string);
+        return (string) preg_replace("/!./", "", $string);
     }
 
     /**
@@ -51,14 +52,14 @@ class Day9 extends Assignment
      * @param int $removed removed characters excluding the '<' and '>" chars
      * @return string cleaned string
      */
-    public function cleanGarbage($string, &$removed = null)
+    public function cleanGarbage($string, &$removed = null): string
     {
         // filter the garbage
-        $output = (string)preg_replace("/<[^>]*>/", "", $string, -1, $c);
+        $output = (string) \preg_replace("/<[^>]*>/", "", $string, -1, $c);
 
         // calculate number of removed chars by comparing input and output length and compensating for the control
         // characters by subtracting two for every occurrence of a garbage block
-        $removed = strlen($string) - strlen($output) - ($c * 2);
+        $removed = (int) (\strlen($string) - \strlen($output) - ($c * 2));
 
         return $output;
     }
@@ -69,9 +70,9 @@ class Day9 extends Assignment
      * @param string $input
      * @return int Weight of groups
      */
-    public function weighGroups($input)
+    public function weighGroups($input): int
     {
-        $l = strlen($input);
+        $l = \strlen($input);
         $v = $t = 0;
         // loop over the length of the string
         for ($i = 0; $i < $l; $i++) {

@@ -1,17 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Tests\Year2017;
 
+use jvwag\AdventOfCode\Tests\AssignmentTestCase;
 use jvwag\AdventOfCode\Year2017\Day10;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class
  *
  * @package jvwag\AdventOfCode\Tests\Year2017
  */
-class Day10Test extends TestCase
+class Day10Test extends AssignmentTestCase
 {
+    protected const TEST_CLASS = Day10::class;
+
     public function testDay10Part1()
     {
         $assignment = new Day10();
@@ -33,7 +36,10 @@ class Day10Test extends TestCase
         self::assertEquals($expected, $output);
     }
 
-    public function providerPart2()
+    /**
+     * @return array
+     */
+    public function providerPart2(): array
     {
         return
             [

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode;
 
@@ -82,13 +83,13 @@ class AssignmentDownloader
     }
 
     /**
-     * @param $year integer Year of the advent calendar
-     * @param $day integer Day of the advent calendar
+     * @param int|string $year Year of the advent calendar
+     * @param int|string $day Day of the advent calendar
      *
      * @return string Contents of the assignment
      * @throws \InvalidArgumentException
      */
-    public function downloadAssignmentData(int $year, int $day): string
+    public function downloadAssignmentData($year, $day): string
     {
         $day = $this->validateDay($day);
         $year = $this->validateYear($year);
@@ -101,14 +102,14 @@ class AssignmentDownloader
         try {
             $response = $this->http_client->request("GET", $url, ["cookies" => $jar]);
             $body = $response->getBody();
-            $this->logger->info("Downloaded assignment", ["url" => $url, "status" => $response->getStatusCode(), "size" => \strlen($body)]);
+            $this->logger->info("Downloaded assignment", ["url" => $url, "status" => $response->getStatusCode(), "size" => \strlen((string)$body)]);
         } catch (GuzzleException $e) {
             $new_exception = new \Exception("Error downloading file: " . $e->getMessage(), 0, $e);
             $this->logger->error($e->getMessage(), ["exception" => $new_exception]);
             throw new $new_exception;
         }
 
-        return $body;
+        return (string) $body;
     }
 
     /**
@@ -155,8 +156,8 @@ class AssignmentDownloader
     /**
      * Get assignment filename on local filesystem
      *
-     * @param $day int Day number of the advent calendar
-     * @param $year int Year of the advent calendar
+     * @param $day int|string Day number of the advent calendar
+     * @param $year int|string Year of the advent calendar
      *
      * @throws \InvalidArgumentException If the day or year is not correct
      *
@@ -201,9 +202,9 @@ class AssignmentDownloader
      * @param $day int Day of the advent calendar
      *
      * @throws \InvalidArgumentException If the day is invalid of out of bounds
-     * @return int Validated day
+     * @return int|string Validated day
      */
-    public function validateDay(int $day): int
+    public function validateDay($day): int
     {
         $value = filter_var(
             $day,
@@ -217,7 +218,7 @@ class AssignmentDownloader
             throw new \InvalidArgumentException(sprintf("Day must be an integer in range of %d to %d", self::MIN_DAY, self::MAX_DAY));
         }
 
-        return $value;
+        return (int) $value;
     }
 
     /**
@@ -226,9 +227,9 @@ class AssignmentDownloader
      * @param $year int Year of the advent calendar
      *
      * @throws \InvalidArgumentException If the year is invalid of out of bounds
-     * @return int Validated year
+     * @return int|string Validated year
      */
-    public function validateYear(int $year): int
+    public function validateYear($year): int
     {
         $value = filter_var(
             $year,
@@ -242,7 +243,7 @@ class AssignmentDownloader
             throw new \InvalidArgumentException(sprintf("Year must be an integer in range of %d to %d", self::MIN_YEAR, self::MAX_YEAR));
         }
 
-        return $value;
+        return (int) $value;
     }
 
     /**

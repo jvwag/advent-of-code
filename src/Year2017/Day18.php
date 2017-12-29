@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
@@ -59,16 +60,14 @@ class Day18 extends Assignment
      * @param int $sent_counter Counter for the number of sends
      * @return int New position offset
      */
-    private function execute($instruction, &$registers, &$send_queue, &$receive_queue, &$sent_counter = 0)
+    private function execute($instruction, &$registers, &$send_queue, &$receive_queue, &$sent_counter = 0): int
     {
         // parse the instruction
-        $parts = explode(" ", $instruction);
-        $type = $parts[0];
-        $reg = $parts[1];
-        $value = isset($parts[2]) ? $parts[2] : null;
+        [$type, $reg] = $parts = explode(" ", $instruction);
+        $value = $parts[2] ?? null;
 
         // if value or reg is a registry reference and it does not exist, create it
-        if (!isset($registers[$reg]) && !is_numeric($reg)) {
+        if (!is_numeric($reg) && !isset($registers[$reg])) {
             $registers[$reg] = 0;
         }
         if ($value !== null && !is_numeric($value) && !isset($registers[$value])) {
