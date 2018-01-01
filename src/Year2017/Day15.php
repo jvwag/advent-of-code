@@ -27,6 +27,7 @@ class Day15 extends Assignment
     {
         // get the input values
         preg_match("/(\d+)\D*(\d+)/m", trim($this->getInput()), $match);
+        /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
         /** @noinspection PhpUnusedLocalVariableInspection */
         [$tmp, $start1, $start2] = $match;
 

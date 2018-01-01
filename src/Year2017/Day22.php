@@ -46,8 +46,8 @@ class Day22 extends Assignment
     /**
      * Read Grid from Input
      *
-     * @return array[] Two dimensional array with x as first key and y as second, c
-     *                 ontains '.' for clean and '#' for infected spaces as elements
+     * @return array[] Two dimensional array with x as first key and y as second,
+     *                 contains '.' for clean and '#' for infected spaces as elements
      */
     public function readGrid(): array
     {

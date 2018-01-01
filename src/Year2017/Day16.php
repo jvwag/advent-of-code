@@ -53,6 +53,7 @@ class Day16 extends Assignment
             foreach ($commands as $command) {
                 // parse command and determine type and arguments
                 if (preg_match("#^(s|x|p)([^/]+)(/(.*))?$#", $command, $match)) {
+                    /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                     /** @noinspection PhpUnusedLocalVariableInspection */
                     [$tmp, $type, $arg1] = $match;
                     $arg2 = $match[4] ?? null;

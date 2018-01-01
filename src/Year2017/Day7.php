@@ -28,6 +28,7 @@ class Day7 extends Assignment
         foreach ($lines as $line) {
             // parse the line by splitting the node, weight and its children
             if (preg_match("/([a-z]+)\s*\((\d+)\)(.*)/", $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $node, $weight] = $match;
                 $children = [];

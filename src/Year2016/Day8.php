@@ -26,6 +26,7 @@ class Day8 extends Assignment
 
         foreach (explode("\n", trim($data)) as $line) {
             if (preg_match("/^rect (\d+)x(\d+)$/", $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $width, $height] = $match;
                 for ($x = 0; $x < $width; $x++) {
@@ -35,6 +36,7 @@ class Day8 extends Assignment
                 }
 
             } elseif (preg_match("/^rotate (row y|column x)=(\d+) by (\d+)$/", $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $direction, $index, $offset] = $match;
                 if ($direction === "row y") {

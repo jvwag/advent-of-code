@@ -72,6 +72,7 @@ class Infi extends Assignment
             if (!preg_match("/^([\[\(])(-?\d+),(-?\d+)[\]\)]/", $data, $match)) {
                 throw new \InvalidArgumentException("Error in input format");
             }
+            /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
             /** @noinspection PhpUnusedLocalVariableInspection */
             [$tmp, $type, $x, $y] = $match;
 

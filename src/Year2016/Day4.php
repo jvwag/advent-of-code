@@ -24,6 +24,7 @@ class Day4 extends Assignment
 
         foreach ($lines as $line) {
             if (preg_match("/^(.*)-(\d+)\[(.*)\]$/", $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $name, $sector, $checksum] = $match;
 

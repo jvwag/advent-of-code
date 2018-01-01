@@ -28,6 +28,7 @@ class Day6 extends Assignment
         // loop over all commands
         foreach ($lines as $line) {
             \preg_match("/^(.*) (\d+),(\d+) through (\d+),(\d+)$/", \trim($line), $match);
+            /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
             /** @noinspection PhpUnusedLocalVariableInspection */
             [$tmp, $cmd, $x1, $y1, $x2, $y2] = $match;
 

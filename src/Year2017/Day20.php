@@ -41,6 +41,7 @@ class Day20 extends Assignment
         foreach (explode("\n", trim($input)) as $line) {
             // parse one line and store it in particles
             if (preg_match("/^p=<(-?\d+),(-?\d+),(-?\d+)>, v=<(-?\d+),(-?\d+),(-?\d+)>, a=<(-?\d+),(-?\d+),(-?\d+)>$/", $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $p["p"]["x"], $p["p"]["y"], $p["p"]["z"], $p["v"]["x"], $p["v"]["y"], $p["v"]["z"], $p["a"]["x"], $p["a"]["y"], $p["a"]["z"]] = $match;
                 $particles[] = $p;

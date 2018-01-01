@@ -26,6 +26,7 @@ class Day8 extends Assignment
         foreach ($lines as $line) {
             // parse all lines of input code
             if (preg_match('/^([a-z]+) (inc|dec) (-?\d+) if ([a-z]+) ([<>=!]+) (-?\d+)$/', $line, $match)) {
+                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
                 /** @noinspection PhpUnusedLocalVariableInspection */
                 [$tmp, $set_reg, $set_op, $set_val, $comp_reg, $comp_op, $comp_val] = $match;
 

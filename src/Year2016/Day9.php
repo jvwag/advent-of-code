@@ -47,6 +47,7 @@ class Day9 extends Assignment
     {
         $total = 0;
         while (\preg_match("/([A-Z]+)?\\((\d+)x(\d+)\\)(.*)$/", $str, $match)) {
+            /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
             /** @noinspection PhpUnusedLocalVariableInspection */
             [$tmp, $prepend, $len, $mul, $rest] = $match;
             $res = $this->parsePart(\substr($rest, 0, $len));
