@@ -21,7 +21,7 @@ class Day18Test extends AssignmentTestCase
      * @param $input
      * @param $output
      */
-    public function testDay18Part1($input, $output)
+    public function testDay18Part1($input, $output): void
     {
         self::assertSame(
             $output,
@@ -91,7 +91,7 @@ class Day18Test extends AssignmentTestCase
      * @param $input
      * @param $output
      */
-    public function testDay18Part2($input, $output)
+    public function testDay18Part2($input, $output): void
     {
         self::assertSame(
             $output,

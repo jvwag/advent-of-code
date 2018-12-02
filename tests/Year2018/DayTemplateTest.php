@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace jvwag\AdventOfCode\Tests\Year2018;
 
 use jvwag\AdventOfCode\Tests\AssignmentTestCase;
-use jvwag\AdventOfCode\Year2017\DayTemplate;
+use jvwag\AdventOfCode\Year2018\DayTemplate;
 
 /**
  * Class

@@ -20,7 +20,7 @@ class Day9Test extends AssignmentTestCase
      * @param string $expected Expected output
      * @dataProvider providerCleanCancels
      */
-    public function testDay9CleanCancels($input, $expected)
+    public function testDay9CleanCancels($input, $expected): void
     {
         $assignment = new Day9();
 
@@ -54,7 +54,7 @@ class Day9Test extends AssignmentTestCase
      * @param int $expected_remove_chars Expected number of chars that were removed by the cleaning
      * @dataProvider providerCleanGarbage
      */
-    public function testDay9CleanGarbage($input, $expected_output, $expected_remove_chars)
+    public function testDay9CleanGarbage($input, $expected_output, $expected_remove_chars): void
     {
         $assignment = new Day9();
 
@@ -89,7 +89,7 @@ class Day9Test extends AssignmentTestCase
      * @param int $expected Expected weighed number of groups
      * @dataProvider providerCountGroups
      */
-    public function testDay9CountGroups($input, $expected)
+    public function testDay9CountGroups($input, $expected): void
     {
         $assignment = new Day9();
         $output = $assignment->cleanCancels($input);

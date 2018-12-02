@@ -16,7 +16,7 @@ abstract class AssignmentTestCase extends TestCase
     /**
      *
      */
-    public function testSolution()
+    public function testSolution(): void
     {
         $class = $this::TEST_CLASS;
         AssignmentSolution::assert($this, new $class);

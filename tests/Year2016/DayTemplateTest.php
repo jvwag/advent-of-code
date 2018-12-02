@@ -15,7 +15,7 @@ class DayTemplateTest extends AssignmentTestCase
 {
     protected const TEST_CLASS = DayTemplate::class;
 
-    public function testDayTemplate()
+    public function testDayTemplate(): void
     {
         $assignment = new DayTemplate();
         $assignment->setInput("");

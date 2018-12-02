@@ -15,7 +15,7 @@ class Day20Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day20::class;
 
-    public function testDay20Part1()
+    public function testDay20Part1(): void
     {
         $assignment = new Day20();
         $input =
@@ -27,7 +27,7 @@ class Day20Test extends AssignmentTestCase
         self::assertSame(0, $output);
     }
 
-    public function testDay20Part2()
+    public function testDay20Part2(): void
     {
         $assignment = new Day20();
         $input =

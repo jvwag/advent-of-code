@@ -81,7 +81,7 @@ class Day20 extends Assignment
         return (int)array_search(min($distance), $distance, true);
     }
 
-    public function run2($input)
+    public function run2($input): int
     {
         // get all particles in an array
         $particles = $this->convertInput($input);

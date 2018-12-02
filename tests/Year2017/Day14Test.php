@@ -15,7 +15,7 @@ class Day14Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day14::class;
 
-    public function testDay14()
+    public function testDay14(): void
     {
         $assignment = new Day14();
         $assignment->setInput("flqrgnkx");
@@ -31,7 +31,8 @@ class Day14Test extends AssignmentTestCase
      * @param int $size Size
      * @param array $expected Expected coordinates
      */
-    public function testDay14FindAround($x, $size, $expected) {
+    public function testDay14FindAround($x, $size, $expected): void
+    {
         $assignment = new Day14();
         self::assertEquals($expected, $assignment->findAround($x, $size), $x);
     }

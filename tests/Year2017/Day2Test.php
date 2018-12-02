@@ -21,7 +21,7 @@ class Day2Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day2::class;
 
-    public function testDay1Part1Example1()
+    public function testDay1Part1Example1(): void
     {
         $assignment = new Day2();
         $assignment->setInput("5 1 9 5\n7 5 3\n2 4 6 8\n");
@@ -30,7 +30,7 @@ class Day2Test extends AssignmentTestCase
         self::assertSame(18, $output[0]);
     }
 
-    public function testDay2Part2Example1()
+    public function testDay2Part2Example1(): void
     {
         $assignment = new Day2();
         $assignment->setInput("5 9 2 8\n9 4 7 3\n3 8 6 5\n");

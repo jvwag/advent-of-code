@@ -15,7 +15,7 @@ class Day10Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day10::class;
 
-    public function testDay10Part1()
+    public function testDay10Part1(): void
     {
         $assignment = new Day10();
         $output = $assignment->run1("3,4,1,5", 5);
@@ -28,7 +28,7 @@ class Day10Test extends AssignmentTestCase
      * @param $input
      * @param $expected
      */
-    public function testDay10Part2($input, $expected)
+    public function testDay10Part2($input, $expected): void
     {
         $assignment = new Day10();
         $output = $assignment->run2($input);

@@ -15,7 +15,7 @@ class Day11Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day11::class;
 
-    public function testDay11()
+    public function testDay11(): void
     {
         $assignment = new Day11();
 

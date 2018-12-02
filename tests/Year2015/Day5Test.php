@@ -21,7 +21,7 @@ class Day5Test extends AssignmentTestCase
      * @param $input
      * @param $expected
      */
-    public function testDay5Part1($input, $expected)
+    public function testDay5Part1($input, $expected): void
     {
         $assignment = new Day5();
         $assignment->setInput($input);
@@ -45,7 +45,7 @@ class Day5Test extends AssignmentTestCase
             ];
     }
 
-    public function testDay5Part1Combined()
+    public function testDay5Part1Combined(): void
     {
         $assignment = new Day5();
         $assignment->setInput("ugknbfddgicrmopn\naaa\njchzalrnumimnmhp\nhaegwjzuvuyypxyu\ndvszwmarrgswjxmb\n");
@@ -60,7 +60,7 @@ class Day5Test extends AssignmentTestCase
      * @param $input
      * @param $expected
      */
-    public function testDay5Part2($input, $expected)
+    public function testDay5Part2($input, $expected): void
     {
         $assignment = new Day5();
         $assignment->setInput($input);
@@ -83,7 +83,7 @@ class Day5Test extends AssignmentTestCase
             ];
     }
 
-    public function testDay5Part2Combined()
+    public function testDay5Part2Combined(): void
     {
         $assignment = new Day5();
         $assignment->setInput("qjhvhtzxzqqjkmpb\nxxyxx\nuurcxstgmygtbstg\nieodomkazucvgmuy\n");

@@ -21,7 +21,7 @@ class Day11Test extends AssignmentTestCase
      * @param int $expected2 Expected maximum distance
      * @dataProvider providerDay11
      */
-    public function testDay11($input, $expected1, $expected2)
+    public function testDay11($input, $expected1, $expected2): void
     {
         $assignment = new Day11();
         $assignment->setInput($input);

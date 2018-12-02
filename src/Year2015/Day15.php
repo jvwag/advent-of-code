@@ -69,8 +69,8 @@ class Day15 extends Assignment
     /**
      * gives all permutations given a total, and types of values
      *
-     * @param $k int total
-     * @param $n int types
+     * @param int $k total
+     * @param int $n types
      *
      * @return array|bool
      */

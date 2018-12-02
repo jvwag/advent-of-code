@@ -15,7 +15,7 @@ class Day22Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day22::class;
 
-    public function testDay22()
+    public function testDay22(): void
     {
         $assignment = new Day22();
         $assignment->setInput("..#\n#..\n...\n");
@@ -25,7 +25,7 @@ class Day22Test extends AssignmentTestCase
         self::assertEquals(2511944, $output[1]);
     }
 
-    public function testDay22bis()
+    public function testDay22bis(): void
     {
         $assignment = new Day22();
         $assignment->setInput("..#\n#..\n...\n");

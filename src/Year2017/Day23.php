@@ -45,8 +45,6 @@ class Day23 extends Assignment
             $pos += $this->execute($instructions[$pos], $registers);
         } while ($pos !== 8);
 
-        var_dump($registers);
-
         // now count the number of primes using custom code
         $registers["h"] = $this->countPrimesBetween($registers["b"], $registers["c"], 17);
 

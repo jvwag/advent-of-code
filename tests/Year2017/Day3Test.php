@@ -21,7 +21,7 @@ class Day3Test extends AssignmentTestCase
      * @param $input
      * @param $expected
      */
-    public function testDay3Part1($input, $expected)
+    public function testDay3Part1($input, $expected): void
     {
         $assignment = new Day3();
         $assignment->setInput($input);
@@ -50,7 +50,7 @@ class Day3Test extends AssignmentTestCase
      * @param $input
      * @param $expected
      */
-    public function testDay3Part2($input, $expected)
+    public function testDay3Part2($input, $expected): void
     {
         $assignment = new Day3();
         $assignment->setInput($input);

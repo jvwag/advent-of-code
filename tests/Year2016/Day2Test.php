@@ -17,7 +17,7 @@ class Day2Test extends AssignmentTestCase
 
     private $example = "ULL\nRRDDD\nLURDL\nUUUUD";
 
-    public function testDay2Part1Example1()
+    public function testDay2Part1Example1(): void
     {
         $assignment = new Day2();
         $assignment->setInput($this->example);
@@ -26,7 +26,7 @@ class Day2Test extends AssignmentTestCase
         static::assertEquals("1985", $output[0]);
     }
 
-    public function testDay2Part2Example1()
+    public function testDay2Part2Example1(): void
     {
         $assignment = new Day2();
         $assignment->setInput($this->example);

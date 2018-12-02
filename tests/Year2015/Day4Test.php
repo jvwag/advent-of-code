@@ -15,7 +15,7 @@ class Day4Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day4::class;
 
-    public function testDay4Part1Example1()
+    public function testDay4Part1Example1(): void
     {
         $assignment = new Day4();
         $assignment->setInput("abcdef");
@@ -24,7 +24,7 @@ class Day4Test extends AssignmentTestCase
         self::assertEquals(609043, $output[0]);
     }
 
-    public function testDay4Part1Example2()
+    public function testDay4Part1Example2(): void
     {
         $assignment = new Day4();
         $assignment->setInput("pqrstuv");

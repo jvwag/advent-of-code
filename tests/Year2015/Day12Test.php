@@ -20,7 +20,7 @@ class Day12Test extends AssignmentTestCase
      * @param $expected
      * @param $input
      */
-    public function testDay12($input, $expected)
+    public function testDay12($input, $expected): void
     {
         $assignment = new Day12();
 

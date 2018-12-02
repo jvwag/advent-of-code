@@ -15,7 +15,7 @@ class Day21Test extends AssignmentTestCase
 {
     protected const TEST_CLASS = Day21::class;
 
-    public function testDay21()
+    public function testDay21(): void
     {
         $assignment = new Day21();
         $rules = $assignment->parseRules(
@@ -28,7 +28,7 @@ class Day21Test extends AssignmentTestCase
         self::assertEquals(12, $output);
     }
 
-    public function testDay21Rot()
+    public function testDay21Rot(): void
     {
         $assignment = new Day21();
         self::assertEquals("51/62/73/84", $assignment->rotate("1234/5678"));
