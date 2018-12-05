@@ -24,4 +24,18 @@ class Day5Test extends AssignmentTestCase
         self::assertEquals(10, $output[0]);
         self::assertEquals(4, $output[1]);
     }
+
+
+    /**
+     * Test if the pointer is correctly set back to position 0
+     */
+    public function testDay5Fix(): void
+    {
+        $assignment = new Day5();
+        $assignment->setInput("aCcDdEeAXYZ");
+        $output = $assignment->run();
+
+        self::assertEquals(3, $output[0]);
+        self::assertEquals(2, $output[1]);
+    }
 }

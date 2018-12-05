@@ -70,7 +70,7 @@ class Day5 extends Assignment
                 unset($units[$i], $units[$i + 1]);
                 // Re-index the array (this is slow, maybe an Iterator could solve this)
                 $units = array_values($units);
-                // Set index two steps back, but never less than 0
+                // Set index two steps back, but never less than -1 (the next iteration will set it to 0)
                 $i = max([$i - 2, 0]);
             }
         }
