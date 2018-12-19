@@ -12,10 +12,29 @@ use jvwag\AdventOfCode\Assignment;
  */
 class Day17 extends Assignment
 {
+    /** @var string Clay character */
     public const CLAY = "#";
+
+    /** @var string Sand character */
     public const SAND = ".";
+
+    /** @var string Flowing water character */
     public const FLOW = "|";
+
+    /** @var string Resting water character */
     public const REST = "~";
+
+    /** @var int Right */
+    public const LEFT = -1;
+
+    /** @var int Left */
+    public const RIGHT = 1;
+
+    /** @var int Start X */
+    public const START_X = 500;
+
+    /** @var int Start Y */
+    public const START_Y = 0;
 
     /**
      * @return array
@@ -42,7 +61,7 @@ class Day17 extends Assignment
         $max_y = max(array_keys($grid));
 
         // flow through the grid
-        $this->flow(0, 500, $grid, $max_y);
+        $this->flow(self::START_Y, self::START_X, $grid, $max_y);
 
         // reduce the size of the grid: the top rows without clay do not count in the scoring
         /** @noinspection ForeachInvariantsInspection */
@@ -62,7 +81,15 @@ class Day17 extends Assignment
     }
 
 
-    private function flow($y, $x, &$grid, $max_y): void
+    /**
+     * Flow water
+     *
+     * @param int $y Y Starting position
+     * @param int $x X Starting position
+     * @param array $grid Grid of (y,x) characters [|,~,#]
+     * @param int $max_y Maximum Y value of flow
+     */
+    public function flow(int $y, int $x, array &$grid, int $max_y): void
     {
         // keep falling down until we hit something
         while (true) {
@@ -91,10 +118,10 @@ class Day17 extends Assignment
         // loop until we have found what to do to our left and right side
         while (true) {
 
-            $adjacent = $steps = [-1 => null, 1 => null];
+            $adjacent = $steps = [self::LEFT => null, self::RIGHT => null];
 
             // loop in two directions left(-1) and right(+1)
-            foreach ([-1, 1] as $direction) {
+            foreach ([self::LEFT, self::RIGHT] as $direction) {
                 $i = 1;
                 // loop until we have found something
                 while (true) {
@@ -132,9 +159,9 @@ class Day17 extends Assignment
             }
 
             // if the left and right lookups found two clay tiles, we need to convert flowing water to resting water
-            if ($adjacent[-1] === self::CLAY && $adjacent[1] === self::CLAY) {
+            if ($adjacent[self::LEFT] === self::CLAY && $adjacent[self::RIGHT] === self::CLAY) {
                 // loop over most left step, to the most right step
-                for ($i = $steps[-1] + 1; $i <= $steps[1] - 1; $i++) {
+                for ($i = $steps[self::LEFT] + 1; $i <= $steps[self::RIGHT] - 1; $i++) {
                     // set this position to resting water
                     $grid[$y][$i] = self::REST;
                 }

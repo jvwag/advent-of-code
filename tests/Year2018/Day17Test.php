@@ -46,7 +46,7 @@ class Day17Test extends AssignmentTestCase
         );
         $output = $assignment->run();
 
-        self::assertEquals(153, $output[0]);
+        self::assertEquals(152, $output[0]);
         self::assertEquals(125, $output[1]);
     }
 }
