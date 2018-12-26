@@ -17,30 +17,11 @@ class Day16 extends Assignment
      */
     public function run(): array
     {
-
+        // split input into two parts
         [$input_part1, $input_part2] = explode("\n\n\n", $this->getInput());
 
-        // @formatter:off
-        $functions =
-            [
-                "addr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] + $regs[$b]; return $regs; },
-                "addi" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] + $b; return $regs; },
-                "mulr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] * $regs[$b]; return $regs; },
-                "muli" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] * $b; return $regs; },
-                "banr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] & $regs[$b]; return $regs; },
-                "bani" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] & $b; return $regs; },
-                "borr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] | $regs[$b]; return $regs; },
-                "bori" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] | $b; return $regs; },
-                "setr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a]; return $regs; },
-                "seti" => function ($a, $b, $c, $regs) { $regs[$c] = $a; return $regs; },
-                "gtir" => function ($a, $b, $c, $regs) { $regs[$c] = $a > $regs[$b] ? 1 : 0; return $regs; },
-                "gtri" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] > $b ? 1 : 0; return $regs; },
-                "gtrr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] > $regs[$b] ? 1 : 0; return $regs; },
-                "eqir" => function ($a, $b, $c, $regs) { $regs[$c] = $a === $regs[$b] ? 1 : 0; return $regs; },
-                "eqri" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] === $b ? 1 : 0; return $regs; },
-                "eqrr" => function ($a, $b, $c, $regs) { $regs[$c] = $regs[$a] === $regs[$b] ? 1 : 0; return $regs; },
-            ];
-        // @formatter:on
+        // get defined functions
+        $functions = self::getFunctions();
 
         // parse all examples from part one and create a list with possible opcode combinations
         $possible_opcodes = [];
@@ -57,7 +38,7 @@ class Day16 extends Assignment
                 $possible_opcode_count = 0;
                 foreach ($functions as $opcode_name => $function) {
                     // execute opcode function
-                    $output_regs = $function($a, $b, $c, $input_regs);
+                    $output_regs = $function($input_regs, $a, $b, $c);
 
                     // if we found a possible solution to a opcode
                     if ($output_regs === $expected_regs) {
@@ -102,7 +83,7 @@ class Day16 extends Assignment
             // get input line and convert to integers
             [$opcode_number, $a, $b, $c] = array_map("intval", explode(" ", trim($p)));
             // call the function using the opcode lookup table created earlier
-            $regs = $functions[$opcode_list[$opcode_number]]($a, $b, $c, $regs);
+            $regs = $functions[$opcode_list[$opcode_number]]($regs, $a, $b, $c);
         }
 
         // return answers
@@ -111,5 +92,28 @@ class Day16 extends Assignment
                 $examples_with_more_than_two_possible_opcodes,
                 $regs[0], // first register from running the code
             ];
+    }
+
+    public static function getFunctions(): array {
+        // @formatter:off
+        return [
+            "addr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] + $regs[$b]; return $regs; },
+            "addi" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] + $b; return $regs; },
+            "mulr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] * $regs[$b]; return $regs; },
+            "muli" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] * $b; return $regs; },
+            "banr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] & $regs[$b]; return $regs; },
+            "bani" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] & $b; return $regs; },
+            "borr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] | $regs[$b]; return $regs; },
+            "bori" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] | $b; return $regs; },
+            "setr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a]; return $regs; },
+            "seti" => function ($regs, $a, $b, $c) { $regs[$c] = $a; return $regs; },
+            "gtir" => function ($regs, $a, $b, $c) { $regs[$c] = $a > $regs[$b] ? 1 : 0; return $regs; },
+            "gtri" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] > $b ? 1 : 0; return $regs; },
+            "gtrr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] > $regs[$b] ? 1 : 0; return $regs; },
+            "eqir" => function ($regs, $a, $b, $c) { $regs[$c] = $a === $regs[$b] ? 1 : 0; return $regs; },
+            "eqri" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] === $b ? 1 : 0; return $regs; },
+            "eqrr" => function ($regs, $a, $b, $c) { $regs[$c] = $regs[$a] === $regs[$b] ? 1 : 0; return $regs; },
+        ];
+        // @formatter:on
     }
 }
