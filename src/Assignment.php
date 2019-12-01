@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode;
 
-
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -14,19 +13,19 @@ use Psr\Log\NullLogger;
  */
 class Assignment implements AssignmentInterface
 {
-    protected $input = "";
+    protected string $input = "";
 
     /** @var LoggerInterface */
-    protected $logger;
+    protected LoggerInterface $logger;
 
     /**
      * Assignment constructor.
      *
-     * @param LoggerInterface|null $logger
+     * @param LoggerInterface $logger
      */
     public function __construct(LoggerInterface $logger = null)
     {
-        $this->logger = $logger ?: new NullLogger();
+        $this->logger = $logger ?? new NullLogger();
     }
 
     /**

@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode;
 
+use BadMethodCallException;
+use DomainException;
+use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -12,8 +15,8 @@ use Psr\Log\LoggerInterface;
  */
 class AssignmentFactory
 {
-    private $assignment_downloader;
-    private $logger;
+    private AssignmentDownloader $assignment_downloader;
+    private LoggerInterface $logger;
 
     /**
      * AssignmentFactory constructor.
@@ -32,9 +35,9 @@ class AssignmentFactory
      * @param $day
      *
      * @return AssignmentInterface
-     * @throws \DomainException
-     * @throws \InvalidArgumentException
-     * @throws \BadMethodCallException
+     * @throws DomainException
+     * @throws InvalidArgumentException
+     * @throws BadMethodCallException
      */
     public function create($year, $day): AssignmentInterface
     {
@@ -49,7 +52,7 @@ class AssignmentFactory
                 $assignment = new $class($this->logger);
 
                 $data = "";
-                if (\defined($class . "::INPUT_LOCATION")) {
+                if (defined($class . "::INPUT_LOCATION")) {
                     $filename = __DIR__ . "/../downloads/" . $class::INPUT_LOCATION;
                     if (file_exists($filename)) {
                         $data = file_get_contents($filename);
@@ -63,6 +66,6 @@ class AssignmentFactory
                 return $assignment;
             }
         }
-        throw new \BadMethodCallException("Assignment not found");
+        throw new BadMethodCallException("Assignment not found");
     }
 }

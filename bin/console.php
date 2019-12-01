@@ -1,14 +1,17 @@
-#!/usr/bin/php
+#!/bin/env php
 <?php
 
-use jvwag\AdventOfCode\DIContainer;
-
-require __DIR__."/../vendor/autoload.php";
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Console\Application;
 
 try {
-    $container = DIContainer::buildContainer(__DIR__ . "/../");
-    $application = $container->get("application");
-    $application->run();
-} catch (\Exception $e) {
-    echo $e->getMessage();
+    /** @var ContainerInterface $container */
+    $container = require __DIR__ . "/../bootstrap.php";
+
+    $app = $container->get(Application::class);
+    $app->run();
+} catch (Exception | ContainerExceptionInterface $e) {
+    echo $e . PHP_EOL;
 }
+

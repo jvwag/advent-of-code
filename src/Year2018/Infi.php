@@ -60,7 +60,7 @@ class Infi extends Assignment
         }
 
         // determine fastest route between the top right and bottom left (height x width)
-        $route = $this->bfs_path($nodes, 0, ($w * $h) - 1);
+        $route = self::bfs_path($nodes, 0, ($w * $h) - 1);
 
         // print output for debugging
         //$this->printRoute($grid, $h, $w, $route);
@@ -123,7 +123,7 @@ class Infi extends Assignment
      * @license MIT
      * @see https://github.com/lextoumbourou/bfs-php/blob/master/bfs.php
      */
-    private function bfs_path($graph, $start, $end)
+    public static function bfs_path($graph, $start, $end)
     {
         $queue = new \SplQueue();
         # Enqueue the path

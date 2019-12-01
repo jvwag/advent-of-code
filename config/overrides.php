@@ -1,0 +1,6 @@
+<?php
+
+return [
+    // Get your session id from adventofcode.com by copying the session value from the sites cookie after logging in
+    "session" => "",
+];
