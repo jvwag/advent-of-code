@@ -5,8 +5,7 @@ My personal implementation of this [Advent of Code](https://adventofcode.com).
 Create a configuration for downloading the assignments:
 
 1. Find the session cookie by using a debugger on your favorite browser after logging in on the [adventofcode.com](https://adventofcode.com) site. The cookie name is `session`. 
-2. Copy `config/config.json.template` to `config/config.json`
-3. Edit `config/config.json` and replace the `session` entry with the session cookie value 
+2. Edit `config/overrides.php` and replace the `session` entry with the session cookie value 
 
 Make sure the `downloads/` directory is writable.
 
