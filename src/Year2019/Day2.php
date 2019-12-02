@@ -54,7 +54,7 @@ class Day2 extends Assignment
             }
         }
 
-        assert("No solution found");
+        assert(false, "No solution found");
 
         return 0;
     }
@@ -74,7 +74,7 @@ class Day2 extends Assignment
                 case self::END:
                     break 2;
                 default:
-                    assert("Invalid instruction " . $program[$pointer] . " on pos " . $pointer);
+                    assert(false, "Invalid instruction " . $program[$pointer] . " on pos " . $pointer);
             }
             $pointer += 4;
         }
