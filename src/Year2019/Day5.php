@@ -26,7 +26,7 @@ class Day5 extends Assignment
     private const M_POS = 0;
     private const M_IMM = 1;
 
-    private const STEPS = [
+    private const LENGTH = [
         self::ADD => 4, self::MULTIPLY => 4, self::INPUT => 2, self::OUTPUT => 2,
         self::JUMP_TRUE => 3, self::JUMP_FALSE => 3, self::IF_LESS => 4, self::IF_EQUAL => 4,
     ];
@@ -54,69 +54,57 @@ class Day5 extends Assignment
 
         // loop over the program
         while (true) {
-            // TODO: refactor this code to: check for opcode first, and then parse parameters if needed
-
-            // determine parameter 1
-            switch ((int)floor($program[$pointer] / 100) % 10) {
-                case self::M_POS;
-                    $param1 = $program[$program[$pointer + 1]];
-                    break;
-                case self::M_IMM;
-                    $param1 = $program[$pointer + 1];
-                    break;
-                default:
-                    throw new RuntimeException("Invalid mode for parameter 1");
-            }
-
-            // determine parameter 2
-            switch ((int)floor($program[$pointer] / 1000) % 10) {
-                case self::M_POS;
-                    $param2 = $program[$program[$pointer + 2]];
-                    break;
-                case self::M_IMM;
-                    $param2 = $program[$pointer + 2];
-                    break;
-                default:
-                    throw new RuntimeException("Invalid mode for parameter 2");
-            }
-
-            // determine instruction
             $instruction = $program[$pointer] % 100;
+
+            $param_pointer = [];
+            // determine parameters, and their absolute or relative position
+            for ($i = 1; $i < self::LENGTH[$instruction]; $i++) {
+                switch ((int)floor($program[$pointer] / (10 ** (1 + $i))) % 10) {
+                    case self::M_POS;
+                        $param_pointer[$i] = $program[$pointer + $i];
+                        break;
+                    case self::M_IMM;
+                        $param_pointer[$i] = $pointer + $i;
+                        break;
+                    default:
+                        throw new RuntimeException("Invalid mode for parameter " . $i . " in position " . $pointer);
+                }
+            }
+
             switch ($instruction) {
                 case self::ADD:
-                    $program[$program[$pointer + 3]] = $param1 + $param2;
+                    $program[$param_pointer[3]] = $program[$param_pointer[1]] + $program[$param_pointer[2]];
                     break;
                 case self::MULTIPLY:
-                    $program[$program[$pointer + 3]] = $param1 * $param2;
+                    $program[$param_pointer[3]] = $program[$param_pointer[1]] * $program[$param_pointer[2]];
                     break;
                 case self::INPUT:
-                    $program[$program[$pointer + 1]] = $input;
+                    $program[$param_pointer[1]] = $input;
                     break;
                 case self::JUMP_TRUE:
-                    if ($param1 !== 0) {
-                        $pointer = $param2;
+                    if ($program[$param_pointer[1]] !== 0) {
+                        $pointer = $program[$param_pointer[2]];
                         // after a jump we continue directly to processing the new instruction and not to increment
                         // the program counter.
                         continue 2;
                     }
                     break;
                 case self::JUMP_FALSE:
-                    if ($param1 === 0) {
-                        $pointer = $param2;
+                    if ($program[$param_pointer[1]] === 0) {
+                        $pointer = $program[$param_pointer[2]];
                         // same as previous jump
                         continue 2;
                     }
                     break;
                 case self::IF_LESS:
-                    $program[$program[$pointer + 3]] = $param1 < $param2 ? 1 : 0;
+                    $program[$param_pointer[3]] = $program[$param_pointer[1]] < $program[$param_pointer[2]] ? 1 : 0;
                     break;
                 case self::IF_EQUAL:
-                    $program[$program[$pointer + 3]] = $param1 === $param2 ? 1 : 0;
+                    $program[$param_pointer[3]] = $program[$param_pointer[1]] === $program[$param_pointer[2]] ? 1 : 0;
                     break;
                 case self::OUTPUT:
-                    $output = $param1;
+                    $output = $program[$param_pointer[1]];
                     break;
-
                 case self::END:
                     break 2;
                 default:
@@ -124,7 +112,7 @@ class Day5 extends Assignment
             }
 
             // increment steps bases on the type of instruction
-            $pointer += self::STEPS[$instruction];
+            $pointer += self::LENGTH[$instruction];
         }
 
         return $output;
