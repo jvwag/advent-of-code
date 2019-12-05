@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace jvwag\AdventOfCode\Year2019;
 
 use jvwag\AdventOfCode\Assignment;
+use RuntimeException;
 
 /**
  * Class
@@ -74,7 +75,7 @@ class Day2 extends Assignment
                 case self::END:
                     break 2;
                 default:
-                    assert(false, "Invalid instruction " . $program[$pointer] . " on pos " . $pointer);
+                    throw new RuntimeException("Invalid instruction " . $program[$pointer] . " on pos " . $pointer);
             }
             $pointer += 4;
         }

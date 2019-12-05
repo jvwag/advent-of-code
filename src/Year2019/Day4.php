@@ -54,7 +54,8 @@ class Day4 extends Assignment
         return $arr;
     }
 
-    public function filter2(array $arr): array {
+    public function filter2(array $arr): array
+    {
         // now only use values with exactly 2 consecutive values
         $arr = array_filter($arr, static function ($val) {
             return in_array(2, count_chars($val), true);
