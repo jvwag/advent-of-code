@@ -53,7 +53,7 @@ class IntcodeComputerTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Invalid mode for parameter 1");
 
-        $ic = new IntcodeComputer([201]);
+        $ic = new IntcodeComputer([801]);
         $ic->runToEnd();
     }
 
@@ -62,7 +62,7 @@ class IntcodeComputerTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage("Invalid mode for parameter 2");
 
-        $ic = new IntcodeComputer([2101]);
+        $ic = new IntcodeComputer([8101]);
         $ic->runToEnd();
     }
 
@@ -100,5 +100,24 @@ class IntcodeComputerTest extends TestCase
                 [[3, 3, 1107, -1, 8, 3, 4, 3, 99], [8], 0],
                 [[3, 3, 1107, -1, 8, 3, 4, 3, 99], [9], 0],
             ];
+    }
+
+    public function testIntcodeComputerDay9Examples1(): void
+    {
+        $program = [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99];
+        $ic = new IntcodeComputer($program);
+        self::assertSame($program, $ic->runToEnd());
+    }
+
+    public function testIntcodeComputerDay9Examples2(): void
+    {
+        $ic = new IntcodeComputer([1102, 34915192, 34915192, 7, 4, 7, 99, 0]);
+        self::assertSame(16, strlen((string)$ic->runToFirstOutput()));
+    }
+
+    public function testIntcodeComputerDay9Examples3(): void
+    {
+        $ic = new IntcodeComputer([104, 1125899906842624, 99]);
+        self::assertSame(1125899906842624, $ic->runToFirstOutput());
     }
 }

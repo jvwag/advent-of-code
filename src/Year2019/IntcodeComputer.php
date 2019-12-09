@@ -15,14 +15,17 @@ class IntcodeComputer
     private const JUMP_FALSE = 6;
     private const IF_LESS = 7;
     private const IF_EQUAL = 8;
+    private const REL_BASE = 9;
     private const END = 99;
 
     private const M_POS = 0;
     private const M_IMM = 1;
+    private const M_REL = 2;
 
     private const LENGTH = [
         self::ADD => 4, self::MULTIPLY => 4, self::INPUT => 2, self::OUTPUT => 2,
         self::JUMP_TRUE => 3, self::JUMP_FALSE => 3, self::IF_LESS => 4, self::IF_EQUAL => 4,
+        self::REL_BASE => 2,
     ];
 
     /** @var int[] */
@@ -30,10 +33,12 @@ class IntcodeComputer
 
     /** @var int[] */
     private array $program;
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private int $pointer = 0;
+
+    /** @var int */
+    private int $relative_base = 0;
 
     /**
      * @param int[] $program Program
@@ -96,16 +101,21 @@ class IntcodeComputer
 
     /**
      * Run the program until it stops
+     *
+     * @return int[]
      */
-    public function runToEnd(): void
+    public function runToEnd(): array
     {
+        $output = [];
         while (true) {
             $res = $this->process()->current();
             if ($res === null) {
-                return;
+                break;
             }
+            $output[] = $res;
             $this->process()->next();
         }
+        return $output;
     }
 
     /**
@@ -117,11 +127,16 @@ class IntcodeComputer
     {
         // loop over the program
         while (true) {
+//            echo $this->relative_base." | ";
+//            for($x = 0, $xMax = max(array_keys($this->program)); $x <= $xMax; $x++) {
+//                echo $this->program[$x].",";
+//            }
+//            echo PHP_EOL;
             $instruction = $this->program[$this->pointer] % 100;
 
             $param_pointer = [];
             // determine parameters, and their absolute or relative position
-            for ($i = 1; $i <= self::LENGTH[$instruction]; $i++) {
+            for ($i = 1; $i < self::LENGTH[$instruction]; $i++) {
                 switch ((int)floor($this->program[$this->pointer] / (10 ** (1 + $i))) % 10) {
                     case self::M_POS;
                         $param_pointer[$i] = $this->program[$this->pointer + $i];
@@ -129,10 +144,23 @@ class IntcodeComputer
                     case self::M_IMM;
                         $param_pointer[$i] = $this->pointer + $i;
                         break;
+                    case self::M_REL:
+                        $param_pointer[$i] = $this->relative_base + $this->program[$this->pointer + $i];
+                        break;
                     default:
                         throw new RuntimeException("Invalid mode for parameter " . $i . " in position " . $this->pointer);
                 }
+
+                if ($param_pointer[$i] < 0) {
+                    throw new RuntimeException("Negative parameter pointer " . $i . " in position " . $this->pointer);
+                }
+
+                if ($this->program[$param_pointer[$i]] === null) {
+                    $this->program[$param_pointer[$i]] = 0;
+                }
+
             }
+
 
             switch ($instruction) {
                 case self::ADD:
@@ -167,6 +195,9 @@ class IntcodeComputer
                     break;
                 case self::OUTPUT:
                     yield $this->program[$param_pointer[1]];
+                    break;
+                case self::REL_BASE:
+                    $this->relative_base += $this->program[$param_pointer[1]];
                     break;
                 case self::END:
                     return null;
