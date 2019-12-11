@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2019;
 
-use Generator;
 use jvwag\AdventOfCode\Assignment;
 use jvwag\AdventOfCode\Year2015\Day9;
 
@@ -44,7 +43,7 @@ class Day7 extends Assignment
 
                 // now resolve the program and get the first output (this program has one output, we dont bother to
                 // wait until the end of the application)
-                $signal = $amplifier->process()->current();
+                $signal = $amplifier->process();
 
             }
             // use the given signal of the last amplifier as an answer of this permutation
@@ -65,29 +64,21 @@ class Day7 extends Assignment
             // clear amplifier list for this iteration
             /** @var IntcodeComputer[] $amp_computer */
             $amp_computer = [];
-            /** @var Generator[] $amp_process */
-            $amp_process = [];
             // loop until one program stops
             while (true) {
                 // loop over the number of amplifiers to process them in order
                 foreach($amplifier_phases as $i => $phase_setting) {
-                    // if not exists, we will create an amplifier using a IntercodeComputer, and start the process
-                    if (!isset($amp_computer[$i], $amp_process[$i])) {
-                        // use the phase from the permutations, and the signal...
-                        // the signal starts with 0, but when this computer has run one step it will return a signal
-                        // that is used for the next instance of a computer
-                        $amp_computer[$i] = new IntcodeComputer($program, [$phase_setting, $signal]);
-                        // this generator will give us the output during the processing of the program
-                        $amp_process[$i] = $amp_computer[$i]->process();
-                    } else {
-                        // if we already created a computer, just add the input and do a step on the process() function
-                        $amp_computer[$i]->addInput($signal);
-                        $amp_process[$i]->next();
+                    // if not exists, we will create an amplifier using a IntcodeComputer, and start the process
+                    if (!isset($amp_computer[$i])) {
+                        // use the phase from the permutations
+                        $amp_computer[$i] = new IntcodeComputer($program, [$phase_setting]);
                     }
+                    // add the signal from the previous output, or 0 for the first one
+                    $amp_computer[$i]->addInput($signal);
 
                     // the process function should have ran until the first yield, which is our output needed for the
                     // next signal
-                    $res = $amp_process[$i]->current();
+                    $res = $amp_computer[$i]->process();
 
                     // the result of the output could be null, and this indicates the process() function is done
                     if ($res === null) {

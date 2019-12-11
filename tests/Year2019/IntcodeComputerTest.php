@@ -31,7 +31,7 @@ class IntcodeComputerTest extends TestCase
     public function testIntcodeComputerDay2Examples(array $program, array $expected_program): void
     {
         $ic = new IntcodeComputer($program);
-        $ic->process()->current();
+        $ic->process();
 
         self::assertSame($expected_program, $ic->getProgram());
     }
@@ -75,7 +75,7 @@ class IntcodeComputerTest extends TestCase
     public function testIntcodeComputerDay5Examples(array $program, array $input, int $expected_output): void
     {
         $ic = new IntcodeComputer($program, $input);
-        self::assertSame($expected_output, $ic->runToFirstOutput());
+        self::assertSame($expected_output, $ic->process());
     }
 
     public function providerIntcodeComputerDay5Examples(): array
@@ -112,12 +112,12 @@ class IntcodeComputerTest extends TestCase
     public function testIntcodeComputerDay9Examples2(): void
     {
         $ic = new IntcodeComputer([1102, 34915192, 34915192, 7, 4, 7, 99, 0]);
-        self::assertSame(16, strlen((string)$ic->runToFirstOutput()));
+        self::assertSame(16, strlen((string)$ic->process()));
     }
 
     public function testIntcodeComputerDay9Examples3(): void
     {
         $ic = new IntcodeComputer([104, 1125899906842624, 99]);
-        self::assertSame(1125899906842624, $ic->runToFirstOutput());
+        self::assertSame(1125899906842624, $ic->process());
     }
 }

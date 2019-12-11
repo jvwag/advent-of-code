@@ -2,7 +2,6 @@
 
 namespace jvwag\AdventOfCode\Year2019;
 
-use Generator;
 use RuntimeException;
 
 class IntcodeComputer
@@ -25,7 +24,7 @@ class IntcodeComputer
     private const LENGTH = [
         self::ADD => 4, self::MULTIPLY => 4, self::INPUT => 2, self::OUTPUT => 2,
         self::JUMP_TRUE => 3, self::JUMP_FALSE => 3, self::IF_LESS => 4, self::IF_EQUAL => 4,
-        self::REL_BASE => 2,
+        self::REL_BASE => 2, self::END => 0,
     ];
 
     /** @var int[] */
@@ -71,16 +70,6 @@ class IntcodeComputer
     }
 
     /**
-     * Run program until the first output, and return that value
-     *
-     * @return int|null First output, or null if there was no output
-     */
-    public function runToFirstOutput(): ?int
-    {
-        return $this->process()->current();
-    }
-
-    /**
      * Run the program until it stops, then return the last output
      *
      * @return int|null Last output, or null if there was not output
@@ -88,12 +77,7 @@ class IntcodeComputer
     public function runToLastOutput(): ?int
     {
         $output = null;
-        while (true) {
-            $res = $this->process()->current();
-            if ($res === null) {
-                break;
-            }
-            $this->process()->next();
+        while (($res = $this->process()) !== null) {
             $output = $res;
         }
         return $output;
@@ -107,13 +91,8 @@ class IntcodeComputer
     public function runToEnd(): array
     {
         $output = [];
-        while (true) {
-            $res = $this->process()->current();
-            if ($res === null) {
-                break;
-            }
+        while (($res = $this->process()) !== null) {
             $output[] = $res;
-            $this->process()->next();
         }
         return $output;
     }
@@ -121,18 +100,16 @@ class IntcodeComputer
     /**
      * Run the program and give the output, or null when stopped
      *
-     * @return Generator The value in the generator is the output of the program, or null if the program stopped
+     * @return int|null The output value of the program, or null if the program stopped
      */
-    public function process(): Generator
+    public function process(): ?int
     {
         // loop over the program
         while (true) {
-//            echo $this->relative_base." | ";
-//            for($x = 0, $xMax = max(array_keys($this->program)); $x <= $xMax; $x++) {
-//                echo $this->program[$x].",";
-//            }
-//            echo PHP_EOL;
             $instruction = $this->program[$this->pointer] % 100;
+            if(!isset(self::LENGTH[$instruction])) {
+                throw new RuntimeException("Invalid instruction " . $instruction . " on pos " . $this->pointer);
+            }
 
             $param_pointer = [];
             // determine parameters, and their absolute or relative position
@@ -155,13 +132,17 @@ class IntcodeComputer
                     throw new RuntimeException("Negative parameter pointer " . $i . " in position " . $this->pointer);
                 }
 
+                // init new entries in the program array
                 if ($this->program[$param_pointer[$i]] === null) {
                     $this->program[$param_pointer[$i]] = 0;
                 }
 
             }
 
+            // increment steps bases on the type of instruction
+            $this->pointer += self::LENGTH[$instruction];
 
+            // handle the instruction
             switch ($instruction) {
                 case self::ADD:
                     $this->program[$param_pointer[3]] = $this->program[$param_pointer[1]] + $this->program[$param_pointer[2]];
@@ -194,20 +175,16 @@ class IntcodeComputer
                     $this->program[$param_pointer[3]] = $this->program[$param_pointer[1]] === $this->program[$param_pointer[2]] ? 1 : 0;
                     break;
                 case self::OUTPUT:
-                    yield $this->program[$param_pointer[1]];
-                    break;
+                    return $this->program[$param_pointer[1]];
                 case self::REL_BASE:
                     $this->relative_base += $this->program[$param_pointer[1]];
                     break;
                 case self::END:
-                    return null;
                     break 2;
-                default:
-                    throw new RuntimeException("Invalid instruction " . $instruction . " on pos " . $this->pointer);
             }
-
-            // increment steps bases on the type of instruction
-            $this->pointer += self::LENGTH[$instruction];
         }
+
+        // end of program
+        return null;
     }
 }
