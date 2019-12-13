@@ -141,7 +141,7 @@ class Day10 extends Assignment
                 // except 0,0
                 if (!($x === 0 && $y === 0)) {
                     // calculate greatest common divisor of x and y coordinate
-                    $gcd = $this->gcd($x, $y);
+                    $gcd = self::gcd($x, $y);
                     // store shortest natural version of vector with the angle as key
                     $vectors[(string)atan2($x, $y)] = [($x / $gcd), ($y / $gcd)];
                 }
@@ -163,14 +163,14 @@ class Day10 extends Assignment
      * @param int $b Value b
      * @return int Greatest common divisor of value a and b
      */
-    public function gcd(int $a, int $b): int
+    public static function gcd(int $a, int $b): int
     {
         if ($a === 0 || $b === 0) {
             return max(abs($a), abs($b));
         }
 
         $r = $a % $b;
-        return ($r !== 0) ? $this->gcd($b, $r) : abs($b);
+        return ($r !== 0) ? self::gcd($b, $r) : abs($b);
     }
 
     /**
