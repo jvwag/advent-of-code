@@ -27,6 +27,8 @@ class IntcodeComputer
         self::REL_BASE => 2, self::END => 0,
     ];
 
+    public const END_OF_PROGRAM = null;
+
     /** @var int[] */
     private array $input;
 
