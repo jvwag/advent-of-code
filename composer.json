@@ -1,5 +1,5 @@
 {
-  "name": "jvwag/AdventOfCode",
+  "name": "jvwag/adventofcode",
   "description": "My personal solutions to the Advent of Code",
   "minimum-stability": "stable",
   "license": "MIT",
@@ -10,16 +10,16 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 || ^8.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "~6.0",
+    "guzzlehttp/guzzle": "~7.0",
     "monolog/monolog": "~2.0",
     "symfony/console": "~5.0",
     "php-di/php-di": "6.0.10"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "^8.0"
+    "phpunit/phpunit": "^9.3"
   },
   "autoload": {
     "psr-4": {"jvwag\\AdventOfCode\\": "src/"}

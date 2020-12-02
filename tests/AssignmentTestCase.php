@@ -13,9 +13,6 @@ abstract class AssignmentTestCase extends TestCase
 {
     protected const TEST_CLASS = null;
 
-    /**
-     *
-     */
     public function testSolution(): void
     {
         $class = $this::TEST_CLASS;

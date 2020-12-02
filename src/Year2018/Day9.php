@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace jvwag\AdventOfCode\Year2018;
 
 use jvwag\AdventOfCode\Assignment;
+use SplDoublyLinkedList;
 
 /**
  * Class
@@ -26,7 +27,7 @@ class Day9 extends Assignment
         $part1_wins = $part2_wins = array_fill(0, $player_count, 0);
 
         // create linked list with one value
-        $arr = new \SplDoublyLinkedList();
+        $arr = new SplDoublyLinkedList();
         $arr->push(0);
 
         // loop over the number of marble's given, and some more (x100) for part 2

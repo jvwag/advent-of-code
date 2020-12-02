@@ -76,7 +76,7 @@ class Day12 extends Assignment
                 // loop over all positions
                 foreach ($positions as $id => $position) {
                     // if a position is equal to any other position, continue with stepping
-                    if ($position[$xyz] !== $start_positions[$id][$xyz] || $velocities[$id][$xyz] !== 0) {
+                    if (($position[$xyz] ?? null) !== ($start_positions[$id][$xyz] ?? null) || ($velocities[$id][$xyz] ?? null) !== 0) {
                         continue 2;
                     }
                 }
@@ -150,7 +150,9 @@ class Day12 extends Assignment
             // loop over axes (x, y, z)
             foreach (range(0, self::MAX_AXES) as $xyz) {
                 // add velocity of this axis to the axis of the position
-                $positions[$id][$xyz] += $velocities[$id][$xyz];
+                if(isset($velocities[$id][$xyz])) {
+                    $positions[$id][$xyz] += $velocities[$id][$xyz];
+                }
             }
         }
 

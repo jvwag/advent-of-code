@@ -55,11 +55,11 @@ class Day9 extends Assignment
     public function cleanGarbage($string, &$removed = null): string
     {
         // filter the garbage
-        $output = (string) \preg_replace("/<[^>]*>/", "", $string, -1, $c);
+        $output = (string) preg_replace("/<[^>]*>/", "", $string, -1, $c);
 
         // calculate number of removed chars by comparing input and output length and compensating for the control
         // characters by subtracting two for every occurrence of a garbage block
-        $removed = (int) (\strlen($string) - \strlen($output) - ($c * 2));
+        $removed = (int) (strlen($string) - strlen($output) - ($c * 2));
 
         return $output;
     }
@@ -72,7 +72,7 @@ class Day9 extends Assignment
      */
     public function weighGroups($input): int
     {
-        $l = \strlen($input);
+        $l = strlen($input);
         $v = $t = 0;
         // loop over the length of the string
         for ($i = 0; $i < $l; $i++) {

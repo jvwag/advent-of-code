@@ -29,16 +29,16 @@ class Day17 extends Assignment
      */
     public function calculate($liters = self::LITERS): array {
         // list of containers
-        $containers = \array_map(
+        $containers = array_map(
             function ($x) {
-                return (int) \trim($x);
+                return (int) trim($x);
             },
-            \explode("\n", \trim($this->getInput()))
+            explode("\n", trim($this->getInput()))
         );
 
         // init vars
         $output1 = 0;
-        $y_max = \count($containers);
+        $y_max = count($containers);
         $x_max = 2 ** $y_max;
         $us = [];
 
@@ -65,7 +65,7 @@ class Day17 extends Assignment
         // for part two we will need to see in how many combinations we can store the
         // eggnog using the least amount of containers
         $output2 = 0;
-        $min_containers = \min($us);
+        $min_containers = min($us);
         foreach ($us as $u) {
             if ($u === $min_containers) {
                 $output2++;

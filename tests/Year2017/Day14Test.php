@@ -34,7 +34,7 @@ class Day14Test extends AssignmentTestCase
     public function testDay14FindAround($x, $size, $expected): void
     {
         $assignment = new Day14();
-        self::assertEquals($expected, $assignment->findAround($x, $size), $x);
+        self::assertEquals($expected, $assignment->findAround($x, $size), "Location: " . $x);
     }
 
     /**

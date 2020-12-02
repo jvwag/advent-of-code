@@ -3,7 +3,7 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.0/phpunit.xsd"
          bootstrap="bootstrap.php"
-         forceCoversAnnotation="true"
+         forceCoversAnnotation="false"
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
@@ -14,6 +14,9 @@
             <exclude>tests/Year2015/DayTemplateTest.php</exclude>
             <exclude>tests/Year2016/DayTemplateTest.php</exclude>
             <exclude>tests/Year2017/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2018/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2019/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2020/DayTemplateTest.php</exclude>
         </testsuite>
         <testsuite name="no-slow">
             <directory>tests</directory>
@@ -25,6 +28,9 @@
             <exclude>tests/Year2015/DayTemplateTest.php</exclude>
             <exclude>tests/Year2016/DayTemplateTest.php</exclude>
             <exclude>tests/Year2017/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2018/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2019/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2020/DayTemplateTest.php</exclude>
         </testsuite>
     </testsuites>
     <filter>

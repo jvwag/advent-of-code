@@ -52,13 +52,13 @@ class Day10 extends Assignment
                         while (true) {
                             $test_x += $vector[0];
                             $test_y += $vector[1];
-                            // we find an asteroid, and add this to our counter, and continue to a new vector
-                            if ($input[$test_y][$test_x] === "#") {
-                                $c++;
+                            // if we are beyond our grid, than we also continue to a new vector
+                            if (!isset($input[$test_y][$test_x])) {
                                 break;
                             }
-                            // or we are beyond our grid, than we also continue to a new vector
-                            if (!isset($input[$test_y][$test_x])) {
+                            // or we find an asteroid, and add this to our counter, and continue to a new vector
+                            if ($input[$test_y][$test_x] === "#") {
+                                $c++;
                                 break;
                             }
                         }
@@ -91,14 +91,14 @@ class Day10 extends Assignment
                 while (true) {
                     $test_x += $vector[0];
                     $test_y += $vector[1];
-                    // we have found an asteroid, count it and: vaporize it
+                    // if we are beyond our grid, than we also continue to a new vector
+                    if (!isset($input[$test_y][$test_x])) {
+                        break;
+                    }
+                    // if we have found an asteroid, count it and: vaporize it
                     if ($input[$test_y][$test_x] === "#") {
                         $c++;
                         $input[$test_y][$test_x] = "@"; // <- see, vapor!
-                        break;
-                    }
-                    // or we are beyond our grid, than we also continue to a new vector
-                    if (!isset($input[$test_y][$test_x])) {
                         break;
                     }
                 }

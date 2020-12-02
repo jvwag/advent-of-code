@@ -23,7 +23,7 @@ class Day23 extends Assignment
         $pos = 0;
         $registers = [];
         $mul_counter = 0;
-        $count = \count($instructions);
+        $count = count($instructions);
 
         // for part1, loop until the 'rcv' opcode 'eats' the 'is_running' queue
         do {

@@ -31,7 +31,7 @@ class Day3 extends Assignment
                 $col[1][] = $sides[2];
                 $col[2][] = $sides[3];
 
-                if (\count($col[0]) === 3) {
+                if (count($col[0]) === 3) {
                     for ($x = 0; $x < 3; $x++) {
                         if ($this->validTriangle($col[$x][0], $col[$x][1], $col[$x][2])) {
                             $valid2++;

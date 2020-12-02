@@ -21,7 +21,7 @@ class Assignment implements AssignmentInterface
     /**
      * Assignment constructor.
      *
-     * @param LoggerInterface $logger
+     * @param LoggerInterface|null $logger
      */
     public function __construct(LoggerInterface $logger = null)
     {

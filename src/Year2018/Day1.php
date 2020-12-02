@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2018;
 
+use ArrayIterator;
+use InfiniteIterator;
 use jvwag\AdventOfCode\Assignment;
 
 /**
@@ -64,7 +66,7 @@ class Day1 extends Assignment
         $frequency = self::START_FREQUENCY;
 
         // Infinite Iterator for looping over the numbers
-        $i = new \InfiniteIterator(new \ArrayIterator($numbers));
+        $i = new InfiniteIterator(new ArrayIterator($numbers));
 
         // Loop until we find a frequency stat is stored in the found array
         for ($i->rewind(); !isset($found[$frequency]); $i->next()) {

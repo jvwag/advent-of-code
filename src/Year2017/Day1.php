@@ -25,7 +25,7 @@ class Day1 extends Assignment
         $output2 = 0;
 
         // loop over all values
-        $l = \count($data);
+        $l = count($data);
         for ($i = 0; $i < $l; $i++) {
             // determine if value is equal to previous value
             if ($data[$i] === $data[($l + $i - 1) % $l]) {

@@ -18,11 +18,11 @@ class Day5 extends Assignment
     public function run(): array
     {
         // convert input
-        $jumps = \array_map(
+        $jumps = array_map(
             function ($x) {
                 return (int) trim($x);
             },
-            \explode("\n", \trim($this->getInput()))
+            explode("\n", trim($this->getInput()))
         );
 
         // return answers
@@ -44,7 +44,7 @@ class Day5 extends Assignment
         // init vars
         $steps = 0;
         $i = 0;
-        $l = \count($jumps);
+        $l = count($jumps);
 
         // follow jumps until we jump out of bounds
         while ($i >= 0 && $i < $l) {

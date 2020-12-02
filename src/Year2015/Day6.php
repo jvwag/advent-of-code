@@ -20,17 +20,15 @@ class Day6 extends Assignment
         ini_set('memory_limit','512M');
 
         // convert input
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // init grid
-        $grid = \array_fill(0, 1000, array_fill(0, 1000, [0, 0]));
+        $grid = array_fill(0, 1000, array_fill(0, 1000, [0, 0]));
 
         // loop over all commands
         foreach ($lines as $line) {
-            \preg_match("/^(.*) (\d+),(\d+) through (\d+),(\d+)$/", \trim($line), $match);
-            /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            [$tmp, $cmd, $x1, $y1, $x2, $y2] = $match;
+            preg_match("/^(.*) (\d+),(\d+) through (\d+),(\d+)$/", trim($line), $match);
+            [, $cmd, $x1, $y1, $x2, $y2] = $match;
 
             // loop over the given square and changes values on the grid
             for ($x = $x1; $x <= $x2; $x++) {

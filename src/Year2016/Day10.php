@@ -45,7 +45,7 @@ class Day10 extends Assignment
         while ($cont) {
             $cont = false;
             foreach ($map as $id => $bot) {
-                if (!isset($bot["done"]) && isset($bot["values"]) && \count($bot["values"]) === 2) {
+                if (!isset($bot["done"]) && isset($bot["values"]) && count($bot["values"]) === 2) {
                     if (isset($bot["low_bot"])) {
                         $map[$bot["low_bot"]]["values"][] = min($bot["values"]);
                     }
@@ -66,7 +66,7 @@ class Day10 extends Assignment
 
         $id = 0;
         foreach ($map as $id => $bot) {
-            if (isset($bot["values"]) && \in_array(self::REQUESTED_VALUE_1, $bot["values"], true) && \in_array(self::REQUESTED_VALUE_2, $bot["values"], true)) {
+            if (isset($bot["values"]) && in_array(self::REQUESTED_VALUE_1, $bot["values"], true) && in_array(self::REQUESTED_VALUE_2, $bot["values"], true)) {
                 break;
             }
         }

@@ -40,7 +40,7 @@ class Day12 extends Assignment
         // loop over array
         foreach ($arr as $key => $value) {
             // recurse if element is array
-            if (\is_array($value)) {
+            if (is_array($value)) {
                 $sum += $this->countArray($value, $exclude_red);
             // add value if value is numeric
             } elseif (is_numeric($value)) {

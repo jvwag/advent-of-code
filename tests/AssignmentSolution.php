@@ -50,12 +50,12 @@ class AssignmentSolution
                 $output = $assignment->run();
 
                 if ($solution1 !== null) {
-                    $test::assertEquals($solution1, $output[0]);
+                    $test::assertEquals($solution1, rtrim((string)$output[0]));
                 } else {
                     $test::markTestIncomplete("Missing first solution for " . get_class($test));
                 }
                 if ($solution2) {
-                    $test::assertEquals($solution2, $output[1]);
+                    $test::assertEquals($solution2, rtrim((string)$output[1]));
                 } else {
                     $test::markTestIncomplete("Missing second solution for " . get_class($test));
                 }

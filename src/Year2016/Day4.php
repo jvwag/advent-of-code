@@ -33,13 +33,13 @@ class Day4 extends Assignment
                 array_multisort($data, SORT_DESC, array_keys($data), SORT_ASC, $data, $keys);
                 $data = array_combine($keys, $data);
 
-                $check = implode("", array_map("\\chr", \array_slice(array_keys($data), 0, 5)));
+                $check = implode("", array_map("chr", array_slice(array_keys($data), 0, 5)));
 
                 $decrypted_name = "";
                 if ($checksum === $check) {
                     $sector_sum += $sector;
                     foreach (str_split($name) as $c) {
-                        $decrypted_name .= $c !== "-" ? \chr(((\ord($c) - 97 + $sector) % 26) + 97) : "-";
+                        $decrypted_name .= $c !== "-" ? chr(((ord($c) - 97 + $sector) % 26) + 97) : "-";
                     }
                     if ($decrypted_name === "northpole-object-storage") {
                         $hidden_sector = $sector;

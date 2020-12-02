@@ -19,8 +19,8 @@ class Day24 extends Assignment
     {
         // fill components array with input
         $components = [];
-        foreach (\explode("\n", \trim($this->getInput())) as $line) {
-            $components[] = array_map("\intval", \explode("/", trim($line)));
+        foreach (explode("\n", trim($this->getInput())) as $line) {
+            $components[] = array_map("\intval", explode("/", trim($line)));
         }
 
         // init statistics

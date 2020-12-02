@@ -50,9 +50,8 @@ class Infi extends Assignment
             }
             return $count;
         }
-        assert(false,"No solution found");
 
-        return 0;
+        assert(false,"No solution found");
     }
 
     public function run2($input): int

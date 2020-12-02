@@ -52,10 +52,8 @@ class Day16 extends Assignment
             // loop over all commands
             foreach ($commands as $command) {
                 // parse command and determine type and arguments
-                if (preg_match("#^(s|x|p)([^/]+)(/(.*))?$#", $command, $match)) {
-                    /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
-                    /** @noinspection PhpUnusedLocalVariableInspection */
-                    [$tmp, $type, $arg1] = $match;
+                if (preg_match("#^([sxp])([^/]+)(/(.*))?$#", $command, $match)) {
+                    [, $type, $arg1] = $match;
                     $arg2 = $match[4] ?? null;
 
                     switch ($type) {
@@ -67,7 +65,7 @@ class Day16 extends Assignment
                         // switch position of two programs by position in circular buffer
                         case "x":
                             $tmp = $buffer[(int)$arg1];
-                            $buffer[(int)$arg1] = $buffer{(int)$arg2};
+                            $buffer[(int)$arg1] = $buffer[(int)$arg2];
                             $buffer[(int)$arg2] = $tmp;
                             break;
                         // switch position of two programs by name in circular buffer
@@ -75,7 +73,7 @@ class Day16 extends Assignment
                             $pos1 = strpos($buffer, $arg1);
                             $pos2 = strpos($buffer, $arg2);
                             $tmp = $buffer[$pos1];
-                            $buffer[$pos1] = $buffer{$pos2};
+                            $buffer[$pos1] = $buffer[$pos2];
                             $buffer[$pos2] = $tmp;
                             break;
                     }

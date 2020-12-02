@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace jvwag\AdventOfCode\Year2018;
 
 use jvwag\AdventOfCode\Assignment;
+use SplQueue;
 
 /**
  * Class Infi
@@ -125,7 +126,7 @@ class Infi extends Assignment
      */
     public static function bfs_path($graph, $start, $end)
     {
-        $queue = new \SplQueue();
+        $queue = new SplQueue();
         # Enqueue the path
         $queue->enqueue([$start]);
         $visited = [$start];
@@ -133,13 +134,13 @@ class Infi extends Assignment
             $path = $queue->dequeue();
             # Get the last node on the path
             # so we can check if we're at the end
-            $node = $path[\count($path) - 1];
+            $node = $path[count($path) - 1];
 
             if ($node === $end) {
                 return $path;
             }
             foreach ($graph[$node] as $neighbour) {
-                if (!\in_array($neighbour, $visited, true)) {
+                if (!in_array($neighbour, $visited, true)) {
                     $visited[] = $neighbour;
                     # Build new path appending the neighbour then and enqueue it
                     $new_path = $path;

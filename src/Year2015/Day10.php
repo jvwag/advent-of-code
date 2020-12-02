@@ -18,7 +18,7 @@ class Day10 extends Assignment
     public function run(): array
     {
         // trim input
-        $number = \trim($this->getInput());
+        $number = trim($this->getInput());
 
         // init output
         $output1 = null;
@@ -30,12 +30,12 @@ class Day10 extends Assignment
 
             // The second solution requests the 40th pass
             if ($x === 40) {
-                $output1 = \strlen($number);
+                $output1 = strlen($number);
             }
         }
 
         // get the 50th pass output
-        $output2 = \strlen($number);
+        $output2 = strlen($number);
 
 
         // return answers
@@ -57,7 +57,7 @@ class Day10 extends Assignment
         $prev_char = null;
         $count = 0;
 
-        $l = \strlen($input) + 1;
+        $l = strlen($input) + 1;
         for ($i = 0; $i < $l; $i++) {
             $new_char = null;
             if (isset($input[$i])) {

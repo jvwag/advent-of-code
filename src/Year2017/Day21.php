@@ -48,7 +48,7 @@ class Day21 extends Assignment
         for ($x = 0; $x < $iterations; $x++) {
             // split the image into chunks, apply the rules and join the image again
             $image = $this->join(
-                \array_map(
+                array_map(
                     function ($x) use ($rules) {
                         return $rules[$x];
                     },
@@ -58,7 +58,7 @@ class Day21 extends Assignment
         }
 
         // count the number of '#' pixels
-        return \substr_count($image, self::FILLED_CHAR);
+        return substr_count($image, self::FILLED_CHAR);
     }
 
     /**
@@ -71,9 +71,9 @@ class Day21 extends Assignment
     {
         $rules = [];
         // loop over every line
-        foreach (\explode("\n", \trim($input)) as $line) {
+        foreach (explode("\n", trim($input)) as $line) {
             // extract the rule and the result
-            [$rule, $result] = \explode(" => ", \trim($line));
+            [$rule, $result] = explode(" => ", trim($line));
 
             // loop over 4x rotation and flipping (the forth is also the begin state)
             for ($x = 0; $x < 4; $x++) {
@@ -97,11 +97,11 @@ class Day21 extends Assignment
     public function rotate($input): string
     {
         // determine height and width based on the number of '\' or the position of the first '\'
-        $height = \substr_count($input, self::SEP) + 1;
-        $width = \strpos($input, self::SEP);
+        $height = substr_count($input, self::SEP) + 1;
+        $width = strpos($input, self::SEP);
 
         // generate a base output with all '/' separators and '.' empty spaces on the right place
-        $output = \implode(self::SEP, \array_fill(0, $width, \str_repeat(self::EMPTY_CHAR, $height)));
+        $output = implode(self::SEP, array_fill(0, $width, str_repeat(self::EMPTY_CHAR, $height)));
 
         // loop over all x and y points
         for ($y = 0; $y < $height; $y++) {
@@ -126,11 +126,11 @@ class Day21 extends Assignment
     public function flip($input): string
     {
         // determine height and width based on the number of '\' or the position of the first '\'
-        $height = \substr_count($input, self::SEP) + 1;
-        $width = \strpos($input, self::SEP);
+        $height = substr_count($input, self::SEP) + 1;
+        $width = strpos($input, self::SEP);
 
         // generate a base output with all '/' separators and '.' empty spaces on the right place
-        $output = \implode(self::SEP, \array_fill(0, $height, \str_repeat(self::EMPTY_CHAR, $width)));
+        $output = implode(self::SEP, array_fill(0, $height, str_repeat(self::EMPTY_CHAR, $width)));
 
         // loop over all x and y points
         for ($y = 0; $y < $height; $y++) {
@@ -156,7 +156,7 @@ class Day21 extends Assignment
         $output = [];
 
         // determine width and size of chunks
-        $width = \strpos($input, self::SEP);
+        $width = strpos($input, self::SEP);
         $size = $width % 2 === 0 ? 2 : 3;
 
         // loop over all chunks (x and y)
@@ -175,7 +175,7 @@ class Day21 extends Assignment
 
                 }
                 // and separate chunk array with '/' separators, filling it into the output array
-                $output[] = \implode(self::SEP, $chunk);
+                $output[] = implode(self::SEP, $chunk);
             }
         }
 
@@ -192,11 +192,11 @@ class Day21 extends Assignment
     public function join($input): string
     {
         // determine width and size of chunks
-        $count = (int)\sqrt(\count($input));
-        $size = \strpos($input[0], self::SEP);
+        $count = (int)sqrt(count($input));
+        $size = strpos($input[0], self::SEP);
 
         // generate a base output with all '/' separators and '.' empty spaces on the right place
-        $output = \implode(self::SEP, \array_fill(0, $count * $size, \str_repeat(self::EMPTY_CHAR, $count * $size)));
+        $output = implode(self::SEP, array_fill(0, $count * $size, str_repeat(self::EMPTY_CHAR, $count * $size)));
 
         // loop over all chunks (x and y)
         for ($y = 0; $y < $count; $y++) {

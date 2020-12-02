@@ -60,7 +60,7 @@ class Day13 extends Assignment
     {
         // init vars
         $sums = [];
-        $c = \count(\array_keys($data));
+        $c = count(array_keys($data));
         // go over all possible permutations
         foreach (Day9::permutations(array_keys($data)) as $person) {
             $sum = 0;

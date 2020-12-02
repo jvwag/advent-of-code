@@ -18,7 +18,7 @@ class Day5 extends Assignment
     public function run(): array
     {
         // convert input
-        $words = \array_map("\\trim", \explode("\n", \trim($this->getInput())));
+        $words = array_map("trim", explode("\n", trim($this->getInput())));
 
         // init output
         $nice1 = 0;
@@ -29,8 +29,8 @@ class Day5 extends Assignment
 
             // count characters
             $count_chars = [];
-            foreach (\count_chars($word) as $k => $v) {
-                $count_chars[\chr($k)] = $v;
+            foreach (count_chars($word) as $k => $v) {
+                $count_chars[chr($k)] = $v;
             }
 
             // determine there are at least three vowels
@@ -45,11 +45,11 @@ class Day5 extends Assignment
             $two_consecutive_letters = false;
             foreach ($count_chars as $letter => $c) {
                 if ($c > 1) {
-                    if ($two_consecutive_letters === false && \strpos($word, \str_repeat($letter, 2)) !== false) {
+                    if ($two_consecutive_letters === false && strpos($word, str_repeat($letter, 2)) !== false) {
                         $two_consecutive_letters = true;
                     }
 
-                    if ($letter_hop === false && \preg_match("|" . $letter . "." . $letter . "|", $word)) {
+                    if ($letter_hop === false && preg_match("|" . $letter . "." . $letter . "|", $word)) {
                         $letter_hop = true;
                     }
                 }
@@ -58,18 +58,18 @@ class Day5 extends Assignment
             // determine bad combo's
             $no_bad_combos = true;
             foreach (["ab", "cd", "pq", "xy"] as $bad_word) {
-                if (\strpos($word, $bad_word) !== false) {
+                if (strpos($word, $bad_word) !== false) {
                     $no_bad_combos = false;
                 }
             }
 
             // determine repeating letters (like: xyx)
             $i = 0;
-            $max_index = \strlen($word) - 2;
+            $max_index = strlen($word) - 2;
             $two_repeat = false;
             do {
-                $char_combo = \substr($word, $i, 2);
-                $char_combo_pos = \strpos($word, $char_combo);
+                $char_combo = substr($word, $i, 2);
+                $char_combo_pos = strpos($word, $char_combo);
                 if ($char_combo_pos !== false && ($char_combo_pos > $i + 1 || $char_combo_pos < $i - 1)) {
                     $two_repeat = true;
                     break;

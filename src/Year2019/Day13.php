@@ -50,7 +50,7 @@ class Day13 extends Assignment
 
         // loop over the grid and count all values
         return array_reduce($grid, static function ($carry, $line) {
-            return $carry + array_count_values($line)[self::BLOCK_TILE];
+            return $carry + (array_count_values($line)[self::BLOCK_TILE] ?? 0);
         });
     }
 

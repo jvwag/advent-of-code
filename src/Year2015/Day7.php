@@ -18,12 +18,12 @@ class Day7 extends Assignment
     public function run(): array
     {
         // convert input
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // generate rules from input
         $rules = [];
         foreach ($lines as $line) {
-            if (\preg_match("|^(([0-9a-z]+ )?([A-Z]+) )?([0-9a-z]+) -> ([a-z]+)$|", $line, $match)) {
+            if (preg_match("|^(([0-9a-z]+ )?([A-Z]+) )?([0-9a-z]+) -> ([a-z]+)$|", $line, $match)) {
                 $rules[$match[5]] = [trim($match[2]), $match[3], $match[4]];
             }
         }
@@ -87,7 +87,7 @@ class Day7 extends Assignment
             return $circuit[$wire] = $r;
         }
 
-        return \assert(false, "invalid input");
+        return assert(false, "invalid input");
     }
 
 }

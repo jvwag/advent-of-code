@@ -20,7 +20,7 @@ class Day15 extends Assignment
         ini_set('memory_limit','512M');
 
         // get lines
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
 
         // fill ingredient data
@@ -35,7 +35,7 @@ class Day15 extends Assignment
         $scores1 = $scores2 = [];
 
         // loop over all possible combinations of ingredients to 100 teaspoons
-        foreach ($this->multiChoose(100, \count($data)) as $dist) {
+        foreach ($this->multiChoose(100, count($data)) as $dist) {
 
             // loop over the ingredients to add all scores based on the distribution
             $capacity = $durability = $flavor = $texture = $calories = 0;

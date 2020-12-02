@@ -18,7 +18,7 @@ class Day16 extends Assignment
     public function run(): array
     {
         // get input
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // init output
         $output1 = null;
@@ -74,10 +74,10 @@ class Day16 extends Assignment
             }
 
             // if we have the same amount of matches as we had values to match for, it must be this sue!
-            if ($output1 === null && $match1 === \count($values)) {
+            if ($output1 === null && $match1 === count($values)) {
                 $output1 = $sue_id;
             // same goes for the second part
-            } elseif ($output2 === null && $match2 === \count($values)) {
+            } elseif ($output2 === null && $match2 === count($values)) {
                 $output2 = $sue_id;
             }
         }

@@ -99,9 +99,12 @@ class Day13 extends Assignment
             }
         }
 
-        // the position of the last cart left is the output of part 2
-        $cart = reset($carts);
-        $output2 = $cart["x"] . "," . $cart["y"];
+        $output2 = null;
+        if($carts) {
+            // the position of the last cart left is the output of part 2
+            $cart = reset($carts);
+            $output2 = $cart["x"] . "," . $cart["y"];
+        }
 
         // return answers
         return

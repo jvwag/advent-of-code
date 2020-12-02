@@ -52,11 +52,11 @@ class Day22 extends Assignment
     public function readGrid(): array
     {
         // convert input
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // determine height and width
-        $height = \count($lines);
-        $width = \strlen($lines[0]);
+        $height = count($lines);
+        $width = strlen($lines[0]);
 
         // form grid
         $grid = [];

@@ -46,8 +46,8 @@ class Day12 extends Assignment
         // return answers
         return
             [
-                \count($solutions[0]), // number of programs connected to program 0
-                \count($solutions), // number of program groups
+                count($solutions[0]), // number of programs connected to program 0
+                count($solutions), // number of program groups
             ];
     }
 

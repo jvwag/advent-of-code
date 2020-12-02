@@ -44,7 +44,7 @@ class Day25 extends Assignment
         preg_match_all("/In state (.):" . $regex_block . $regex_block . "/", $input, $match);
 
         // loop over all states
-        $c_states = \count($match[0]);
+        $c_states = count($match[0]);
         for ($x = 0; $x < $c_states; $x++) {
             // we have two sets, and the second offset is 4
             foreach ([0, 4] as $y) {
@@ -72,7 +72,7 @@ class Day25 extends Assignment
         // return answers
         return
             [
-                \array_sum($memory),
+                array_sum($memory),
                 null
             ];
     }

@@ -54,7 +54,5 @@ class Day2 extends Assignment
         }
 
         assert(false, "No solution found");
-
-        return 0;
     }
 }

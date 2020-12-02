@@ -18,10 +18,10 @@ class Day8 extends Assignment
     public function run(): array
     {
         // convert input
-        $lines = \array_map("\\trim", \explode("\n", \trim($this->getInput())));
+        $lines = array_map("trim", explode("\n", trim($this->getInput())));
 
         // init vars
-        $e = null;
+        $e = "";
         $total = 0;
         $chars1 = 0;
         $chars2 = 0;
@@ -33,17 +33,18 @@ class Day8 extends Assignment
              * - comment this line if you are really sure you want this!
              * - https://stackoverflow.com/questions/951373/when-is-eval-evil-in-php
              */
-            \assert(false, "The solution of Day 8 in 2015 is disabled because it uses eval() and possibly with remote data".PHP_EOL);
+            assert(false, "The solution of Day 8 in 2015 is disabled because it uses eval() and possibly with remote data" . PHP_EOL);
 
             /**
              * WARNING, BIG SECURITY HOLE
-             * - uncomment this line if you want to test this solution
              */
-            // eval("\$e = $line;");
 
-            $total += \strlen($line);
-            $chars1 += \strlen($e);
-            $chars2 += \strlen("\"" . \str_replace(["\\", "\""], ["\\\\", "\\\""], $line) . "\"");
+            /** @noinspection PhpUnreachableStatementInspection */
+            eval("\$e = $line;");
+
+            $total += strlen($line);
+            $chars1 += strlen($e);
+            $chars2 += strlen("\"" . str_replace(["\\", "\""], ["\\\\", "\\\""], $line) . "\"");
         }
 
         // init output

@@ -59,7 +59,7 @@ class Day7 extends Assignment
     private function findABBA($str): array
     {
         $out = [];
-        for ($x = 0; $x < \strlen($str) - 3; $x++) {
+        for ($x = 0; $x < strlen($str) - 3; $x++) {
             if ($str[$x + 0] !== $str[$x + 1] && $str[$x + 0] === $str[$x + 3] && $str[$x + 1] === $str[$x + 2]) {
                 $out[$x] = substr($str, $x, 4);
             }
@@ -76,7 +76,7 @@ class Day7 extends Assignment
     private function findABA($str): array
     {
         $out = [];
-        for ($x = 0; $x < \strlen($str) - 2; $x++) {
+        for ($x = 0; $x < strlen($str) - 2; $x++) {
             if ($str[$x + 0] !== $str[$x + 1] && $str[$x + 0] === $str[$x + 2]) {
                 $out[$x] = substr($str, $x, 3);
             }

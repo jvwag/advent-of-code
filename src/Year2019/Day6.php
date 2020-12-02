@@ -56,7 +56,7 @@ class Day6 extends Assignment
     {
         do {
             $path[] = $obj;
-        } while ($obj = $constellation[$obj]);
+        } while ($obj = $constellation[$obj] ?? false);
 
         return $path;
     }

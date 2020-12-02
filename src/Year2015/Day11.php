@@ -18,7 +18,7 @@ class Day11 extends Assignment
     public function run(): array
     {
         // trim input
-        $password = \trim($this->getInput());
+        $password = trim($this->getInput());
 
         // find passwords
         $new_password1 = $this->newPassword($password);
@@ -47,7 +47,7 @@ class Day11 extends Assignment
             // check for strait
             $strait = false;
             for($i = 0; $i < 25; $i++) {
-                if (\strpos($password, \chr(97 + $i) . \chr(98 + $i) . \chr(99 + $i)) !== false) {
+                if (strpos($password, chr(97 + $i) . chr(98 + $i) . chr(99 + $i)) !== false) {
                     $strait = true;
                 }
             }
@@ -55,7 +55,7 @@ class Day11 extends Assignment
             // check for bad characters
             $bad_chars = false;
             foreach(["i", "o", "l"] as $char) {
-                if (\strpos($password, $char) !== false) {
+                if (strpos($password, $char) !== false) {
                     $bad_chars = true;
                 }
             }
@@ -63,7 +63,7 @@ class Day11 extends Assignment
             // check for to overlapping pairs of letters
             $two_overlap = 0;
             for($i = 0; $i < 26; $i++) {
-                if (strpos($password, \chr(97 + $i) . \chr(97 + $i)) !== false) {
+                if (strpos($password, chr(97 + $i) . chr(97 + $i)) !== false) {
                     $two_overlap++;
                 }
             }

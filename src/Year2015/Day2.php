@@ -18,14 +18,14 @@ class Day2 extends Assignment
     public function run(): array
     {
         // convert input to matrix with dimensions
-        $data = \array_map(
+        $data = array_map(
             // split rows into columns
             function ($row) {
                 // split rows with lxbxh data into array and convert to integer
-                return \array_map("\\intval", \explode("x", trim($row)));
+                return array_map("\\intval", explode("x", trim($row)));
             },
             // split input into rows
-            \explode("\n", \trim($this->getInput()))
+            explode("\n", trim($this->getInput()))
         );
 
         // init output
@@ -42,7 +42,7 @@ class Day2 extends Assignment
 
             // find two smallest values
             $a = [$l, $w, $h];
-            \sort($a);
+            sort($a);
 
             // add some more (see assignment)
             $paper += $a[0] * $a[1];

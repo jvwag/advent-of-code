@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2017;
 
+use InvalidArgumentException;
 use jvwag\AdventOfCode\Assignment;
 
 /** @noinspection SpellCheckingInspection */
@@ -55,7 +56,7 @@ class Infi extends Assignment
 
     /**
      * @return array
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function run(): array
     {
@@ -70,7 +71,7 @@ class Infi extends Assignment
         while ($data) {
             // parse one element
             if (!preg_match("/^([\[\(])(-?\d+),(-?\d+)[\]\)]/", $data, $match)) {
-                throw new \InvalidArgumentException("Error in input format");
+                throw new InvalidArgumentException("Error in input format");
             }
             /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
             /** @noinspection PhpUnusedLocalVariableInspection */
@@ -104,7 +105,7 @@ class Infi extends Assignment
                 }
             }
             // remove the data we just processed from the data string
-            $data = \substr($data, \strlen($match[0]));
+            $data = substr($data, strlen($match[0]));
         }
 
         // init the output

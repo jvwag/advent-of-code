@@ -131,7 +131,7 @@ class Day10 extends Assignment
         // loop over all elements in sparse hash
         for ($x = 0; $x < 256; $x++) {
             // xor the value to the specific group (0-15)
-            $xor[(int)\floor($x / 16)] ^= $sparse_hash[$x];
+            $xor[(int)floor($x / 16)] ^= $sparse_hash[$x];
         }
 
         // join the xor array and format it to hex

@@ -18,7 +18,7 @@ class Day3 extends Assignment
     public function run(): array
     {
         // convert input
-        $input = \str_split($this->getInput());
+        $input = str_split($this->getInput());
 
         // init output
         $a = $b = [];
@@ -66,8 +66,8 @@ class Day3 extends Assignment
         // return answers
         return
             [
-                \count($a),
-                \count($b),
+                count($a),
+                count($b),
             ];
     }
 }

@@ -18,7 +18,7 @@ class Day3 extends Assignment
     public function run(): array
     {
         // convert input
-        $input = (int) \trim($this->getInput());
+        $input = (int) trim($this->getInput());
         $output2 = null;
 
         // init vars

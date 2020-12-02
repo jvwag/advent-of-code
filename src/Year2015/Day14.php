@@ -30,7 +30,7 @@ class Day14 extends Assignment
     public function calculate(int $time = self::SECONDS): array
     {
         // get lines
-        $lines = \explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // convert input to data
         $data = [];
@@ -41,7 +41,7 @@ class Day14 extends Assignment
         }
 
         // init vars
-        $c = \count($data);
+        $c = count($data);
         $distances = [];
         $scores = [];
 

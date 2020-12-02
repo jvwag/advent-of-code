@@ -135,7 +135,7 @@ class IntcodeComputer
                 }
 
                 // init new entries in the program array
-                if ($this->program[$param_pointer[$i]] === null) {
+                if (($this->program[$param_pointer[$i]] ?? null) === null) {
                     $this->program[$param_pointer[$i]] = 0;
                 }
 

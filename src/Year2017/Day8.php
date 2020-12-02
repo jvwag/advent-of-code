@@ -22,13 +22,11 @@ class Day8 extends Assignment
         $max_reg = 0;
 
         // get input
-        $lines = explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
         foreach ($lines as $line) {
             // parse all lines of input code
             if (preg_match('/^([a-z]+) (inc|dec) (-?\d+) if ([a-z]+) ([<>=!]+) (-?\d+)$/', $line, $match)) {
-                /** @todo remove noinspection and $tmp after fix for https://youtrack.jetbrains.com/issue/WI-34517 */
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                [$tmp, $set_reg, $set_op, $set_val, $comp_reg, $comp_op, $comp_val] = $match;
+                [, $set_reg, $set_op, $set_val, $comp_reg, $comp_op, $comp_val] = $match;
 
                 // cast the values to integers
                 $comp_val = (int)$comp_val;

@@ -84,7 +84,7 @@ class Day18 extends Assignment
      */
     public static function step(array $old_grid): array
     {
-        $grid_size = \count($old_grid);
+        $grid_size = count($old_grid);
         $new_grid = [];
         for ($x = 0; $x < $grid_size; $x++) {
             for ($y = 0; $y < $grid_size; $y++) {
@@ -116,7 +116,7 @@ class Day18 extends Assignment
      */
     public static function lock(array $grid): array
     {
-        $grid_size = \count($grid);
+        $grid_size = count($grid);
         $grid[0][0] = $grid[0][$grid_size - 1] = $grid[$grid_size - 1][0] = $grid[$grid_size - 1][$grid_size - 1] = 1;
 
         return $grid;

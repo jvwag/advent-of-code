@@ -40,7 +40,7 @@ class Day5 extends Assignment
                 return $x !== $i && $x !== $i + self::ASCII_LOWERCASE_OFFSET;
             }));
 
-            // calculate the lenght of collapsed version, and see if it is smaller than a previous letter calculation
+            // calculate the length of collapsed version, and see if it is smaller than a previous letter calculation
             $output2 = min([$output2, $this->collapse($less_units)]);
         }
 
@@ -61,7 +61,6 @@ class Day5 extends Assignment
      */
     public function collapse(array $units): int
     {
-        /** @noinspection CallableInLoopTerminationConditionInspection */
         // Loop over all units
         for ($i = 0; $i < count($units) - 1; $i++) {
             // If the current unit and the next unit are the same
@@ -76,6 +75,6 @@ class Day5 extends Assignment
         }
 
         // Return the count of units after collapsing
-        return \count($units);
+        return count($units);
     }
 }

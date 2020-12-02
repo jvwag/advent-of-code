@@ -18,7 +18,7 @@ class Day7 extends Assignment
     public function run(): array
     {
         // get input
-        $lines = explode("\n", \trim($this->getInput()));
+        $lines = explode("\n", trim($this->getInput()));
 
         // init vars
         $nodes = [];
@@ -53,7 +53,6 @@ class Day7 extends Assignment
         $tmp = array_diff(array_keys($nodes), $all_children);
         $root = array_pop($tmp);
 
-        $balance = 0;
         $diff = 0;
         // traverse all nodes, starting with the root node
         $node = $root;

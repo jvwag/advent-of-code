@@ -114,6 +114,6 @@ class Day20 extends Assignment
         }
 
         // count the number of particles left
-        return \count($particles);
+        return count($particles);
     }
 }

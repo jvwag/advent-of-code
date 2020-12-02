@@ -18,12 +18,12 @@ class Day9 extends Assignment
     public function run(): array
     {
         // convert input
-        $lines = \array_map("\\trim", \explode("\n", \trim($this->getInput())));
+        $lines = array_map("\\trim", explode("\n", trim($this->getInput())));
 
         // map all routes
         $map = [];
         foreach($lines as $line) {
-            if (\preg_match("/^(.+) to (.+) = (.+)$/", $line, $match)) {
+            if (preg_match("/^(.+) to (.+) = (.+)$/", $line, $match)) {
                 $map[$match[1]][$match[2]] = $match[3];
                 $map[$match[2]][$match[1]] = $match[3];
             }
@@ -34,7 +34,7 @@ class Day9 extends Assignment
         foreach(self::permutations(array_keys($map)) as $perm)
         {
             // now get the sum of the routes
-            $c = \count($perm) - 1;
+            $c = count($perm) - 1;
             $sum = 0;
             for($x = 0; $x < $c; $x++) {
                 $sum += $map[$perm[$x]][$perm[$x + 1]];
@@ -65,7 +65,7 @@ class Day9 extends Assignment
         }
 
         $return = [];
-        for($i = \count($items) - 1; $i >= 0; --$i)
+        for($i = count($items) - 1; $i >= 0; --$i)
         {
             $new_items = $items;
             $new_perms = $perms;

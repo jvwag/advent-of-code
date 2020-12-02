@@ -18,23 +18,23 @@ class Day6 extends Assignment
     public function run(): array
     {
         // get input
-        $mem = \explode("\t", trim($this->getInput()));
+        $mem = explode("\t", trim($this->getInput()));
 
         // init output
         $output1 = 0;
         $output2 = null;
 
         // set initial vars
-        $c = \count($mem);
+        $c = count($mem);
 
         // loop until we find a same state
         $states = [];
-        while(!\in_array($mem, $states, true)) {
+        while(!in_array($mem, $states, true)) {
             // store the current state (and the current step for answer 2)
             $states[$output1] = $mem;
 
             // determine the memory with the largest value
-            $i = \array_search(max($mem), $mem, true);
+            $i = array_search(max($mem), $mem, true);
 
             // get the value
             $j = $mem[$i];

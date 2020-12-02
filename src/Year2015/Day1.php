@@ -18,7 +18,7 @@ class Day1 extends Assignment
     public function run(): array
     {
         // convert input to array of characters
-        $data = \str_split($this->getInput());
+        $data = str_split($this->getInput());
 
         // init output
         $level = 0;

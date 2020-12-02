@@ -22,7 +22,7 @@ class Day1 extends Assignment
         $x = 0;
         $y = 0;
         $d = 0;
-        $first_crossing = false;
+        $first_crossing = [];
         $visited_blocks = [];
 
         // Parse all locations
@@ -52,7 +52,7 @@ class Day1 extends Assignment
         return
             [
                 abs($x) + abs($y),
-                abs($first_crossing[0]) + abs($first_crossing[1]),
+                abs($first_crossing[0] ?? 0) + abs($first_crossing[1] ?? 0),
             ];
     }
 }

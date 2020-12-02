@@ -67,7 +67,7 @@ class Day11 extends Assignment
         for ($y = 0; $y <= $max_y; $y++) {
             for ($x = 0; $x <= $max_x; $x++) {
                 // draw a character
-                $output .= $grid[$x][$y] === self::WHITE ? "\u{2588}" : " ";
+                $output .= ($grid[$x][$y] ?? null) === self::WHITE ? "\u{2588}" : " ";
             }
             // strip trailing spaces of the line, and add a newline
             $output = rtrim($output) . PHP_EOL;
