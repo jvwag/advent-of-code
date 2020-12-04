@@ -48,9 +48,11 @@ class AssignmentFactory
 
         $data = "";
         if (defined($class . "::INPUT_LOCATION")) {
-            $filename = __DIR__ . "/../downloads/" . constant($class . "::INPUT_LOCATION");
-            if (file_exists($filename)) {
-                $data = file_get_contents($filename);
+            if(constant($class . "::INPUT_LOCATION") !== null) {
+                $filename = __DIR__ . "/../downloads/" . constant($class . "::INPUT_LOCATION");
+                if (file_exists($filename)) {
+                    $data = file_get_contents($filename);
+                }
             }
         } else {
             $data = $this->assignment_downloader->getAssignmentData($year, (int)$day);
