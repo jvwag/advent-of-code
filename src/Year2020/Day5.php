@@ -18,16 +18,22 @@ class Day5 extends Assignment
     public function run(): array
     {
         // get al the cards, and split them up in two groups, first 7 chars, and last 3 chars
-        $cards = array_map(fn($s) => [substr($s, 0, 7), substr($s, -3)], explode("\n", trim($this->getInput())));
+        $lines = explode("\n", trim($this->getInput()));
+        $cards = array_map(fn($s) => [substr($s, 0, 7), substr($s, -3)], $lines);
 
         // calculate all seat id's based on the row and column number encoded in binary space partitioning
         $seat_ids = array_map(fn($c) => ($this->BspToInt($c[0]) * 8) + $this->BspToInt($c[1]), $cards);
 
+        // get some metadata from all our calculated seats
+        $min_seat_id = min($seat_ids);
+        $max_seat_id = max($seat_ids);
+        $all_possible_seat_ids = range($min_seat_id, $max_seat_id);
+
         // return answers
         return
             [
-                max($seat_ids), // the highest seat_id
-                array_values(array_diff(range(min($seat_ids), max($seat_ids)), $seat_ids))[0] // and the only missing seat_id
+                $max_seat_id, // the highest seat_id
+                array_values(array_diff($all_possible_seat_ids, $seat_ids))[0] // and the only missing seat_id
             ];
     }
 
