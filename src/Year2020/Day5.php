@@ -43,6 +43,9 @@ class Day5 extends Assignment
      */
     private function BspToInt(string $str): int
     {
+        // this will work as well :)
+        // return bindec(str_replace(["B", "R", "F", "L"], ["1", "1", "0", "0"], $str));
+
         $num = 0;
         $len = strlen($str);
         // loop over the number
