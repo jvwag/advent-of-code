@@ -31,18 +31,23 @@ class Day8 extends Assignment
         $output2 = 0;
         // loop over the code finding jumps
         foreach ($code as $line_num => $code_line) {
-            if ($code_line[0] === "jmp") {
-                // create a copy of the code
-                $code_copy = $code;
-
-                // replace a jump by a nop
-                $code_copy[$line_num][0] = "nop";
-
-                // now test if the code completes (executeCode will return true)
-                if($this->executeCode($code_copy, $output2)) {
-                    // stop looking for jmp's
+            // create a copy of the code
+            $code_copy = $code;
+            // replace a jmp for a nop, or a nop for a jmp, or continue if this is not the case
+            switch ($code_line[0]) {
+                case "jmp":
+                    $code_copy[$line_num][0] = "nop";
                     break;
-                }
+                case "nop":
+                    $code_copy[$line_num][0] = "jmp";
+                    break;
+                default:
+                    continue 2;
+            }
+            // now test if the code completes (executeCode will return true)
+            if ($this->executeCode($code_copy, $output2)) {
+                // stop looking for jmp's
+                break;
             }
         }
 
@@ -64,7 +69,7 @@ class Day8 extends Assignment
         while ($p < $l) {
 
             // but break if we execute the same line twice
-            if(isset($executed_code[$p])) {
+            if (isset($executed_code[$p])) {
                 return false;
             }
             $executed_code[$p] = true;
