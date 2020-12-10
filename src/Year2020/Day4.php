@@ -8,7 +8,7 @@ use jvwag\AdventOfCode\Assignment;
 /**
  * Class
  *
- * @package jvwag\AdventOfCode\Year202
+ * @package jvwag\AdventOfCode\Year2020
  */
 class Day4 extends Assignment
 {

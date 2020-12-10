@@ -22,9 +22,11 @@ class Day10 extends Assignment
 
         // seed the number of arrangements, we always start with one
         $arrangements[0] = 1;
-        // array to count the steps for part1, count one step up and three steps up
+
+        // array to count the steps for part one, count one-step-up and three-steps-up
         $steps = [1 => 0, 3 => 1];
-        // the previous adapter to compare with (the amount of steps between the adapters)
+
+        // the previous adapter to compare with for part one (the amount of steps between the adapters)
         $previous_adapter = 0;
 
         // loop over all adapters
@@ -34,9 +36,8 @@ class Day10 extends Assignment
             $steps[$adapter - $previous_adapter]++;
             $previous_adapter = $adapter;
 
-            //
-            $arrangement_sum = 0;
             // loop over the three previous used adapter arrangements calculations
+            $arrangement_sum = 0;
             for ($i = $adapter - 3; $i < $adapter; $i++) {
                 // if the arrangement has been calculated
                 if (isset($arrangements[$i])) {
@@ -44,6 +45,7 @@ class Day10 extends Assignment
                     $arrangement_sum += $arrangements[$i];
                 }
             }
+
             // the sum of the previous arrangements is the arrangement for this adapter
             $arrangements[$adapter] = $arrangement_sum;
         }
