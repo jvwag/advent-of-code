@@ -128,18 +128,18 @@ class Day12 extends Assignment
         switch ($degrees) {
             case 90:
             case -270:
-                $out_x = $y * -1;
+                $out_x = -$y;
                 $out_y = $x;
                 break;
             case 180:
             case -180:
-                $out_x = $x * -1;
-                $out_y = $y * -1;
+                $out_x = -$x;
+                $out_y = -$y;
                 break;
             case -90:
             case 270:
                 $out_x = $y;
-                $out_y = $x * -1;
+                $out_y = -$x;
                 break;
         }
 

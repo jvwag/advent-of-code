@@ -54,7 +54,7 @@ class AssignmentSolution
                 } else {
                     $test::markTestIncomplete("Missing first solution for " . get_class($test));
                 }
-                if ($solution2) {
+                if ($solution2 !== null) {
                     $test::assertEquals($solution2, rtrim((string)$output[1]));
                 } else {
                     $test::markTestIncomplete("Missing second solution for " . get_class($test));
