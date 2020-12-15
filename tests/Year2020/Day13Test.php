@@ -37,15 +37,28 @@ class Day13Test extends AssignmentTestCase
         self::assertEquals($expected, $output);
     }
 
+    /**
+     * @dataProvider day13part2Provider()
+     * @param $expected
+     * @param $input
+     */
+    public function testDay13Part2Slow($expected, $input): void
+    {
+        $assignment = new Day13();
+        $output = $assignment->run2_slow($input);
+
+        self::assertEquals($expected, $output);
+    }
+
     public function day13part2Provider(): array
     {
         return [
-            [1068781, [7, 13, 0, 0, 59, 0, 31, 19]],
-            [3417, [17, 0, 13, 19]],
-            [754018, [67, 7, 59, 61]],
-            [779210, [67, 0, 7, 59, 61]],
-            [1261476, [67, 7, 0, 59, 61]],
-            [1202161486, [1789, 37, 47, 1889]],
+            [1068781, [0 => 7, 1 => 13, 4 => 59, 6 => 31, 7 => 19]],
+            [3417, [0 => 17, 2 => 13, 3 => 19]],
+            [754018, [0 => 67, 1 => 7, 2 => 59, 3 => 61]],
+            [779210, [0 => 67, 2 => 7, 3 => 59, 4 => 61]],
+            [1261476, [0 => 67, 1 => 7, 3 => 59, 4 => 61]],
+            [1202161486, [0 => 1789, 1 => 37, 2 => 47, 3 => 1889]],
         ];
     }
 
