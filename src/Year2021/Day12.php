@@ -39,11 +39,12 @@ class Day12 extends Assignment
      * Recurse over an array of nodes and their connections, returning all possible paths given the limitations
      * in the assignment.
      *
-     * The used_small_cave_route flag is used to indicate the assignment type (true = part 1, false is part 2) and
-     * in part two set to true within the recursion when a small cave is used twice.
+     * The used_small_cave_route flag is used to indicate if a small cave can be, or has been, used twice.
+     * For the first part of the assignment set this to true so the code will skip the possibility to use a small
+     * cave twice.
      *
      * @param array $nodes Array of nodes with their connections
-     * @param bool|null $already_used_small_cave_route Set to null in part one, set to false in part 2
+     * @param bool $already_used_small_cave_route Set to true in part one, set to false in part two
      * @param string $node Node to check in nodes list
      * @param array $path Currently processing path
      * @return array Array of path arrays that have been found given the nodes list start node
@@ -64,10 +65,10 @@ class Day12 extends Assignment
                 if ($neighbour !== "start") {
                     // if the neighbour is a big cave (uppercase), or we have not been to a small cave
                     if (strtoupper($neighbour) === $neighbour || !in_array($neighbour, $path)) {
-                        // we can always go there and look around
+                        // we can go there and look around
                         $paths = array_merge($paths, $this->recurse($nodes, $already_used_small_cave_route, $neighbour, $path));
                     } elseif ($already_used_small_cave_route === false) {
-                        // but we can visit it again if we have not visited a small cave twice (indicated by flag)
+                        // or we can visit it again if we have not visited a small cave twice (indicated by flag)
                         $paths = array_merge($paths, $this->recurse($nodes, true, $neighbour, $path));
                     }
                 }
