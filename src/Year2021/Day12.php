@@ -65,11 +65,11 @@ class Day12 extends Assignment
                 if ($neighbour !== "start") {
                     // if the neighbour is a big cave (uppercase), or we have not been to a small cave
                     if (strtoupper($neighbour) === $neighbour || !in_array($neighbour, $path)) {
-                        // we can go there and look around
-                        $paths = array_merge($paths, $this->recurse($nodes, $already_used_small_cave_route, $neighbour, $path));
+                        // we can go there and look around, and combine the found paths with our currents paths
+                        $paths = [...$paths, ...$this->recurse($nodes, $already_used_small_cave_route, $neighbour, $path)];
                     } elseif ($already_used_small_cave_route === false) {
                         // or we can visit it again if we have not visited a small cave twice (indicated by flag)
-                        $paths = array_merge($paths, $this->recurse($nodes, true, $neighbour, $path));
+                        $paths = [...$paths, ...$this->recurse($nodes, true, $neighbour, $path)];
                     }
                 }
             }
