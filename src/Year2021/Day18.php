@@ -23,8 +23,21 @@ class Day18 extends Assignment
         $sum = $this->add_and_reduce($input);
         $output1 = $this->calculate_magnitude($sum);
 
+        $c = count($input);
+
+        $max = 0;
+        for($a = 0; $a < $c; $a++) {
+            for($b = 0; $b < $c; $b++) {
+                if($a !== $b) {
+                    $sum = $this->add_and_reduce([$input[$a], $input[$b]]);
+                    $mag = $this->calculate_magnitude($sum);
+                    $max = max($mag, $max);
+                }
+            }
+        }
+
         // init output
-        $output2 = null;
+        $output2 = $max;
 
         // return answers
         return
