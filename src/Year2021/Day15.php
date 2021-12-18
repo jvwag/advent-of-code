@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace jvwag\AdventOfCode\Year2021;
 
-// a bit more memory is needed for pathfinding
-ini_set("memory_limit", "1G");
-
 use jvwag\AdventOfCode\Assignment;
 
 // and we use the A* path-finding algorithm by Jose (jmgq)
@@ -13,6 +10,8 @@ use jvwag\AdventOfCode\Assignment;
 use JMGQ\AStar\AStar;
 use JMGQ\AStar\DomainLogicInterface;
 
+// a bit more memory is needed for pathfinding
+ini_set("memory_limit", "1G");
 
 /**
  * Class
