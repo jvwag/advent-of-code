@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress XmlUnboundNsPrefix -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.0/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.0/phpunit.xsd"
          bootstrap="bootstrap.php"
-         forceCoversAnnotation="false"
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
@@ -17,6 +16,8 @@
             <exclude>tests/Year2018/DayTemplateTest.php</exclude>
             <exclude>tests/Year2019/DayTemplateTest.php</exclude>
             <exclude>tests/Year2020/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2021/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2022/DayTemplateTest.php</exclude>
         </testsuite>
         <testsuite name="no-slow">
             <directory>tests</directory>
@@ -31,6 +32,8 @@
             <exclude>tests/Year2018/DayTemplateTest.php</exclude>
             <exclude>tests/Year2019/DayTemplateTest.php</exclude>
             <exclude>tests/Year2020/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2021/DayTemplateTest.php</exclude>
+            <exclude>tests/Year2022/DayTemplateTest.php</exclude>
         </testsuite>
     </testsuites>
     <filter>
