@@ -62,14 +62,13 @@ class Day10 extends Assignment
             }
 
             // for part 2 we will fill a display grid (a string), we will cut it up in rows of 40 chars later
-            // due to using modulus 40 we must adjust the cycle and registry offset to zero (now we are counting
-            // up from 1)... if we do not do this tiny errors around the edges will occur
+            // due to using modulus 40 we must adjust the cycle  to zero (now we are counting up from 1)
+            // if we do not do this tiny errors around the edges will occur
             $cycle0 = ($cycle - 1) % 40;
-            $x0 = $x - 1;
 
             // add a "#" or "." to the display sting determined if the horizontal position overlays
-            // with the sprite (from $x to $x + 2) position
-            $display .= ($cycle0 >= $x0 && $cycle0 <= $x0 + 2) ? "#" : ".";
+            // with the sprite (from $x - 1 to $x + 1) position (the x value is the middle of the sprite)
+            $display .= ($cycle0 >= $x - 1 && $cycle0 <= $x + 1) ? "#" : ".";
         }
 
         // return answers
