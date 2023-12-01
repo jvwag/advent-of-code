@@ -6,3 +6,4 @@ config/overrides.php
 composer.phar
 composer.lock
 .phpunit.result.cache
+Dockerfile
