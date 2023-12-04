@@ -34,7 +34,7 @@ class Day3 extends Assignment
                 } else {
                     // if we have found no number, but we have started filling the number
                     if ($number !== "") {
-                        // we add the number to the list, with the x,y value of its last digit
+                        // we add the number to the list, with the x,y value of the position just after its last digit
                         $number_locations[] = [$number, $x, $y];
                         // rinse and repeat
                         $number = "";
@@ -52,7 +52,9 @@ class Day3 extends Assignment
             }
             // if we are at the end of the line, if we were are still constructing a number, add it to the list
             if ($number !== "") {
-                $number_locations[] = [$number, $x, $y];
+                // and add one to the x coordinate because we are storing the location one position -after- the
+                // last digit of the number
+                $number_locations[] = [$number, $x + 1, $y];
             }
         }
 
