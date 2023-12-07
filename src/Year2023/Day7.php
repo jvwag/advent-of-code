@@ -15,6 +15,7 @@ class Day7 extends Assignment
     private const ORDER = ["0", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"];
     private const JOKER_ASCII = 74;
     private const JOKER_CHAR = "J";
+    private const JOKER_ALT_SCORING = "0";
 
     /**
      * @return array
@@ -80,7 +81,7 @@ class Day7 extends Assignment
 
             // to make sure we calculate the weight properly replace tje 'J' with a '0' indicating
             // the joker has the lowest weight
-            $hand = str_replace(self::JOKER_CHAR, "0", $hand);
+            $hand = str_replace(self::JOKER_CHAR, self::JOKER_ALT_SCORING, $hand);
         }
 
         // count the number of card groups
@@ -103,7 +104,7 @@ class Day7 extends Assignment
         }
 
         // now take each card and replace the card character with a weighted value,
-        // because we have more than 10 type of cards we use hexadecimal ('*'=Joker => 0x0, '2' => 0x1, 'K' => 0xD)
+        // because we have more than 10 type of cards we use hexadecimal ('0'(=Joker) => 0x0, '2' => 0x1, 'K' => 0xD)
         foreach (str_split($hand) as $card) {
             $output .= dechex(array_search($card, self::ORDER));
         }
