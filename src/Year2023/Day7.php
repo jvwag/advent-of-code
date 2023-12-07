@@ -60,13 +60,13 @@ class Day7 extends Assignment
             ];
     }
 
-    public function convertHandToSortableString(string $hand, $part_two = false): string
+    public function convertHandToSortableString(string $hand, $handle_jokers = false): string
     {
         // count each type of card in hand
         $count_of_card_types = count_chars($hand, 1);
 
         // if we process part to, do some special stuff to handle the jokers
-        if ($part_two && isset($count_of_card_types[self::JOKER_ASCII])) {
+        if ($handle_jokers && isset($count_of_card_types[self::JOKER_ASCII])) {
             // save how many jokers we have got in this hand
             $j_count = $count_of_card_types[self::JOKER_ASCII];
             // and unset the jokers from the card count
@@ -84,20 +84,20 @@ class Day7 extends Assignment
             $hand = str_replace(self::JOKER_CHAR, self::JOKER_ALT_SCORING, $hand);
         }
 
-        // count the number of card groups
-        $count_of_card_groups = array_count_values($count_of_card_types);
+        // count the number of card groups, and fill some missing values: this way we don't have to check for key existence
+        $count_of_card_groups = array_count_values($count_of_card_types) + array_fill(1, 5, 0);
         // determine the first character of the output, based on the type of card combinations will find
-        if (isset($count_of_card_groups[5]) && $count_of_card_groups[5] === 1) {
+        if ($count_of_card_groups[5] === 1) {
             $output = 7; // five of a kind
-        } elseif (isset($count_of_card_groups[4]) && $count_of_card_groups[4] === 1) {
+        } elseif ($count_of_card_groups[4] === 1) {
             $output = 6; // four of a kind
-        } elseif (isset($count_of_card_groups[3], $count_of_card_groups[2]) && $count_of_card_groups[3] === 1 && $count_of_card_groups[2] === 1) {
+        } elseif ($count_of_card_groups[3] === 1 && $count_of_card_groups[2] === 1) {
             $output = 5; // full house
-        } elseif (isset($count_of_card_groups[3], $count_of_card_groups[1]) && $count_of_card_groups[3] === 1 && $count_of_card_groups[1] === 2) {
+        } elseif ($count_of_card_groups[3] === 1) {
             $output = 4; // three of a kind
-        } elseif (isset($count_of_card_groups[2], $count_of_card_groups[1]) && $count_of_card_groups[2] === 2 && $count_of_card_groups[1] === 1) {
+        } elseif ($count_of_card_groups[2] === 2) {
             $output = 3; // two pair
-        } elseif (isset($count_of_card_groups[2], $count_of_card_groups[1]) && $count_of_card_groups[2] === 1 && $count_of_card_groups[1] === 3) {
+        } elseif ($count_of_card_groups[2] === 1) {
             $output = 2; // one pair
         } else {
             $output = 1; // high card
@@ -112,6 +112,4 @@ class Day7 extends Assignment
         // return the string, ready for sorting
         return $output;
     }
-
-
 }
