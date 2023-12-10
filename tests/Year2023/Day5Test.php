@@ -30,6 +30,6 @@ class Day5Test extends AssignmentTestCase
         $output = $assignment->run();
 
         self::assertEquals(35, $output[0]);
-        self::assertEquals(null, $output[1]);
+        self::assertEquals(46, $output[1]);
     }
 }
