@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace jvwag\AdventOfCode\Tests\Year2023;
 
 use jvwag\AdventOfCode\Tests\AssignmentTestCase;
-use jvwag\AdventOfCode\Year2022\DayTemplate;
+use jvwag\AdventOfCode\Year2023\DayTemplate;
 
 /**
  * Class
  *
- * @package jvwag\AdventOfCode\Tests\Year2022
+ * @package jvwag\AdventOfCode\Tests\Year2023
  */
 class DayTemplateTest extends AssignmentTestCase
 {
