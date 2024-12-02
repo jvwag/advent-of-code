@@ -5,11 +5,6 @@ namespace jvwag\AdventOfCode\Year2024;
 
 use jvwag\AdventOfCode\Assignment;
 
-/**
- * Class
- *
- * @package jvwag\AdventOfCode\Year2023
- */
 class DayTemplate extends Assignment
 {
     /**
