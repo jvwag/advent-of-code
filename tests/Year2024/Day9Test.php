@@ -17,6 +17,6 @@ class Day9Test extends AssignmentTestCase
         $output = $assignment->run();
 
         self::assertEquals(1928, $output[0]);
-        self::assertEquals(null, $output[1]);
+        self::assertEquals(2858, $output[1]);
     }
 }
