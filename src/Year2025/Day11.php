@@ -19,8 +19,8 @@ class Day11 extends Assignment
         // do a recursive search on the two assignments
         return
             [
-                isset($nodes["you"]) ? $this->findAllPaths($nodes,"you", "out", 1) : null,
-                isset($nodes["svr"]) ? $this->findAllPaths($nodes,"svr", "out", 2) : null
+                isset($nodes["you"]) ? $this->findAllPaths($nodes, "you", "out", 1) : null,
+                isset($nodes["svr"]) ? $this->findAllPaths($nodes, "svr", "out", 2) : null
             ];
     }
 
